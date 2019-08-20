@@ -25,15 +25,28 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="whD-8s-dhG">
+                    <rect key="frame" x="16" y="143" width="912" height="320"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="320" id="oG2-bx-Aml"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.9882352941176471" green="0.36470588235294116" blue="0.46666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="DnY-kk-mHI" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="DKu-fV-Ob2"/>
+                <constraint firstItem="whD-8s-dhG" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="Inh-Go-fVa"/>
+                <constraint firstItem="whD-8s-dhG" firstAttribute="top" secondItem="DnY-kk-mHI" secondAttribute="bottom" constant="16" id="ZmB-gi-LU5"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="whD-8s-dhG" secondAttribute="trailing" constant="16" id="aOT-94-FZ2"/>
                 <constraint firstItem="DnY-kk-mHI" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="40" id="p2s-p7-Vjs"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="DnY-kk-mHI" secondAttribute="trailing" constant="40" id="qdq-rV-ofF"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="priceHistoryContainer" destination="whD-8s-dhG" id="bnJ-fP-REw"/>
+            </connections>
             <point key="canvasLocation" x="177.69784172661872" y="-9.1726618705035978"/>
         </view>
     </objects>

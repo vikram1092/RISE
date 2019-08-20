@@ -8,6 +8,7 @@ target 'RISE' do
   # Pods for RISE
   
   pod 'Charts'
+  pod 'Alamofire'
 
   # Rx
   pod 'RxSwift'

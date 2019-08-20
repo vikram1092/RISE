@@ -1,4 +1,5 @@
 import UIKit
+import RxSwift
 
 class DashboardVC: UIViewController {
     @IBOutlet weak var overviewViewContainer: UIView!
@@ -8,6 +9,9 @@ class DashboardVC: UIViewController {
     let overviewView = OverviewView.viewFromNib()
     let acqView = AcquisitionView.viewFromNib()
     let conversionView = ConversionView.viewFromNib()
+    let riseApi = RiseApi.shared
+    
+    let disposables = CompositeDisposable()
     
     static func make() -> DashboardVC {
         let vc = UIStoryboard(
@@ -22,6 +26,25 @@ class DashboardVC: UIViewController {
         super.viewDidLoad()
         
         setupViews()
+        hitApiRequests()
+    }
+    
+    func hitApiRequests() {
+        
+        let resultHandler: ResultBlock = { result in
+            switch result {
+            case .Loading:
+                ()
+            case .Success(let testResponse):
+                print(testResponse)
+            case .Failure(let error):
+                print(error)
+            }
+        }
+        riseApi.testGet(endpoint: "ping",
+                        method: .get,
+                        params: [:],
+                        resultHandler: resultHandler)
     }
     
     func setupViews() {
@@ -49,5 +72,13 @@ class DashboardVC: UIViewController {
         conversionView.setNeedsLayout()
         
         super.viewWillLayoutSubviews()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        overviewView.bindTo()
+        acqView.bindTo()
+        conversionView.bindTo()
     }
 }
