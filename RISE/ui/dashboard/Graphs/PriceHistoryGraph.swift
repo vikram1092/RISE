@@ -26,13 +26,14 @@ class PriceHistoryGraph: UIView, NibView {
         
         let chartSet = LineChartDataSet(entries: dataEntries, label: "Prices")
         chartSet.colors = [Color.slate()]
-        chartSet.setCircleColor(Color.blue())
+        chartSet.setCircleColor(Color.burple())
         chartSet.circleRadius = 2
         chartSet.drawCircleHoleEnabled = false
         chartSet.lineWidth = 2
+        chartSet.mode = .cubicBezier
         
         let data = LineChartData(dataSet: chartSet)
-        data.setValueTextColor(.white)
+        data.setValueTextColor(Color.lightGray())
         data.setValueFont(.systemFont(ofSize: 9, weight: .medium))
         
         chartView.data = data
@@ -46,18 +47,18 @@ class PriceHistoryGraph: UIView, NibView {
         leftAxis.removeAllLimitLines()
         leftAxis.drawGridLinesEnabled = false
         leftAxis.drawAxisLineEnabled = true
-        leftAxis.labelTextColor = .white
+        leftAxis.labelTextColor = Color.lightGray()
         leftAxis.labelFont = .systemFont(ofSize: 14, weight: .medium)
         
         let xAxis = chartView.xAxis
         xAxis.removeAllLimitLines()
         xAxis.drawGridLinesEnabled = false
         xAxis.drawAxisLineEnabled = true
-        xAxis.labelTextColor = .white
+        xAxis.labelTextColor = Color.lightGray()
         xAxis.labelFont = .systemFont(ofSize: 14, weight: .medium)
         
         let legend = chartView.legend
-        legend.textColor = .white
+        legend.textColor = Color.lightGray()
         legend.font = .systemFont(ofSize: 14, weight: .medium)
         
         chartView.setNeedsLayout()

@@ -31,6 +31,7 @@
 		D1E2BC70230B77A0001EF5C1 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E2BC6F230B77A0001EF5C1 /* SessionManager.swift */; };
 		D1E2BC74230B8A0A001EF5C1 /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E2BC73230B8A0A001EF5C1 /* TestModel.swift */; };
 		D1E2BC76230C8686001EF5C1 /* PriceHistoryGraph.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1E2BC75230C8686001EF5C1 /* PriceHistoryGraph.xib */; };
+		D1E2BC78230CB454001EF5C1 /* PropertyListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E2BC77230CB454001EF5C1 /* PropertyListVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		D1E2BC6F230B77A0001EF5C1 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		D1E2BC73230B8A0A001EF5C1 /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
 		D1E2BC75230C8686001EF5C1 /* PriceHistoryGraph.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PriceHistoryGraph.xib; sourceTree = "<group>"; };
+		D1E2BC77230CB454001EF5C1 /* PropertyListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListVC.swift; sourceTree = "<group>"; };
 		DD469FF8AF6B510A4BA61442 /* Pods-RISEUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RISEUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RISEUITests/Pods-RISEUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		FE22B912CD598BEFFE150721 /* Pods-RISETests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RISETests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RISETests/Pods-RISETests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -216,6 +218,7 @@
 		D1E2BC4E230B5494001EF5C1 /* property list */ = {
 			isa = PBXGroup;
 			children = (
+				D1E2BC77230CB454001EF5C1 /* PropertyListVC.swift */,
 			);
 			path = "property list";
 			sourceTree = "<group>";
@@ -539,6 +542,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1E2BC78230CB454001EF5C1 /* PropertyListVC.swift in Sources */,
 				D1E2BC5A230B5B55001EF5C1 /* AcquisitionView.swift in Sources */,
 				D1E2BC5D230B5CCC001EF5C1 /* NibView.swift in Sources */,
 				D1E2BC55230B56C9001EF5C1 /* DashboardVC.swift in Sources */,

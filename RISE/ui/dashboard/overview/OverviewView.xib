@@ -16,17 +16,17 @@
             <rect key="frame" x="0.0" y="0.0" width="944" height="400"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overview" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DnY-kk-mHI">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Performance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DnY-kk-mHI">
                     <rect key="frame" x="40" y="40" width="864" height="87"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="87" id="ODg-lB-NZh"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="60"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" red="0.51764705882352935" green="0.20392156862745098" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="DnY-kk-mHI" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="DKu-fV-Ob2"/>
                 <constraint firstItem="DnY-kk-mHI" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="40" id="p2s-p7-Vjs"/>
