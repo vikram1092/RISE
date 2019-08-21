@@ -36,9 +36,9 @@ class PropertyListVC: UIViewController {
         let propertyButtons = Observable.combineLatest(first, second, third)
             .observeOn(MainScheduler.instance)
             .map { [weak self] _ in
-            self?.goToDashboard()
-        }
-        .subscribe()
+                self?.goToDashboard()
+            }
+            .subscribe()
         
         let denverState = coloradoButton.rx.tap
             .observeOn(MainScheduler.instance)

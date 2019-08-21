@@ -213,23 +213,21 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n8g-q4-cQT">
-                                                <rect key="frame" x="40" y="74" width="320" height="218"/>
+                                                <rect key="frame" x="40" y="74" width="250" height="218"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="320" id="zLd-TD-z2N"/>
+                                                    <constraint firstAttribute="width" constant="250" id="zLd-TD-z2N"/>
                                                 </constraints>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wSI-eM-dHK">
-                                                <rect key="frame" x="368" y="74" width="320" height="218"/>
+                                                <rect key="frame" x="298" y="74" width="250" height="218"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="320" id="S5O-At-WZO"/>
-                                                    <constraint firstAttribute="width" constant="320" id="TE8-pd-7Io"/>
+                                                    <constraint firstAttribute="width" constant="250" id="TE8-pd-7Io"/>
                                                 </constraints>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oGT-hV-v8i">
-                                                <rect key="frame" x="696" y="74" width="320" height="218"/>
+                                                <rect key="frame" x="556" y="74" width="250" height="218"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="320" id="B7s-TY-hzS"/>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="320" id="JQj-ao-CJt"/>
+                                                    <constraint firstAttribute="width" constant="250" id="B7s-TY-hzS"/>
                                                 </constraints>
                                             </button>
                                         </subviews>
