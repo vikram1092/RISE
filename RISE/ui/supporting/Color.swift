@@ -33,6 +33,7 @@ struct Color {
     static func dislikeRed() -> UIColor { return colorFromHex(0xFF5454) }
     
     // MARK: Neutral
+    static func n0() -> UIColor { return colorFromHex(0xF1F3F8) }
     static func n1() -> UIColor { return colorForGroup(.neutral, level: 1) }
     static func n2() -> UIColor { return colorForGroup(.neutral, level: 2) }
     static func n3() -> UIColor { return colorForGroup(.neutral, level: 3) }

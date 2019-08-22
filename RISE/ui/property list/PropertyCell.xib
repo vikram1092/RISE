@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PropertyCell" id="wab-HC-v3w" customClass="PropertyCell" customModule="RISE" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="InD-3D-CYn">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SFa-ii-tKa">
+                                <rect key="frame" x="0.0" y="148" width="200" height="52"/>
+                                <color key="backgroundColor" red="0.51764705879999995" green="0.20392156859999999" blue="0.83921568629999999" alpha="0.70052975171232879" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="B9U-Gb-taH">
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="148"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="148" id="qV0-tc-pdv"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="SFa-ii-tKa" firstAttribute="top" secondItem="B9U-Gb-taH" secondAttribute="bottom" id="AOK-Dr-f8X"/>
+                            <constraint firstItem="B9U-Gb-taH" firstAttribute="leading" secondItem="InD-3D-CYn" secondAttribute="leading" id="dCy-7e-lmp"/>
+                            <constraint firstAttribute="trailing" secondItem="SFa-ii-tKa" secondAttribute="trailing" id="qfp-zQ-v9n"/>
+                            <constraint firstItem="SFa-ii-tKa" firstAttribute="leading" secondItem="InD-3D-CYn" secondAttribute="leading" id="r6k-Gh-egl"/>
+                            <constraint firstAttribute="bottom" secondItem="SFa-ii-tKa" secondAttribute="bottom" id="tYZ-Rk-Sjy"/>
+                            <constraint firstAttribute="trailing" secondItem="B9U-Gb-taH" secondAttribute="trailing" id="taa-Ip-7g6"/>
+                            <constraint firstItem="B9U-Gb-taH" firstAttribute="top" secondItem="InD-3D-CYn" secondAttribute="top" id="uIT-qC-6iP"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="InD-3D-CYn" secondAttribute="trailing" id="8RC-vx-EsC"/>
+                <constraint firstAttribute="bottom" secondItem="InD-3D-CYn" secondAttribute="bottom" id="G9U-6r-s8S"/>
+                <constraint firstItem="InD-3D-CYn" firstAttribute="leading" secondItem="wab-HC-v3w" secondAttribute="leading" id="rkd-bQ-2LK"/>
+                <constraint firstItem="InD-3D-CYn" firstAttribute="top" secondItem="wab-HC-v3w" secondAttribute="top" id="sN1-Ur-Tes"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="684-df-Mwr"/>
+            <size key="customSize" width="200" height="200"/>
+            <connections>
+                <outlet property="containerView" destination="InD-3D-CYn" id="8Mt-ti-yVD"/>
+                <outlet property="propImageView" destination="B9U-Gb-taH" id="v86-Y0-uc3"/>
+                <outlet property="propNameLabel" destination="SFa-ii-tKa" id="C8P-hi-YDz"/>
+            </connections>
+            <point key="canvasLocation" x="246.37681159420291" y="152.67857142857142"/>
+        </collectionViewCell>
+    </objects>
+</document>

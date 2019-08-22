@@ -11,6 +11,11 @@
 		71F89EAA2C06C6D1D4F26883 /* Pods_RISEUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1980CB960A1C6A056073B071 /* Pods_RISEUITests.framework */; };
 		BB3EA9F28875F26EEB512F10 /* Pods_RISETests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A868EE4E1B6DB1B89385BAD /* Pods_RISETests.framework */; };
 		D1B5B5C0230DF3EE00918DFF /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B5B5BF230DF3EE00918DFF /* Enums.swift */; };
+		D1B5B5C2230E34B500918DFF /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B5B5C1230E34B500918DFF /* Listing.swift */; };
+		D1B5B5C4230E351600918DFF /* PropertyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1B5B5C3230E351600918DFF /* PropertyCell.xib */; };
+		D1B5B5C6230E357000918DFF /* PropertyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B5B5C5230E357000918DFF /* PropertyCell.swift */; };
+		D1B5B5C8230EE86500918DFF /* AcquisitionDataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B5B5C7230EE86500918DFF /* AcquisitionDataPoint.swift */; };
+		D1B5B5CA230EE8E700918DFF /* ConversionDataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B5B5C9230EE8E700918DFF /* ConversionDataPoint.swift */; };
 		D1E2BC1F230B1152001EF5C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E2BC1E230B1152001EF5C1 /* AppDelegate.swift */; };
 		D1E2BC24230B1152001EF5C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1E2BC22230B1152001EF5C1 /* Main.storyboard */; };
 		D1E2BC26230B1156001EF5C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1E2BC25230B1156001EF5C1 /* Assets.xcassets */; };
@@ -61,6 +66,11 @@
 		A16ACB4111D8253B3C03A2E7 /* Pods-RISEUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RISEUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RISEUITests/Pods-RISEUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A4BF74C9C8AC794B7B2A93A0 /* Pods_RISE.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RISE.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1B5B5BF230DF3EE00918DFF /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		D1B5B5C1230E34B500918DFF /* Listing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listing.swift; sourceTree = "<group>"; };
+		D1B5B5C3230E351600918DFF /* PropertyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PropertyCell.xib; sourceTree = "<group>"; };
+		D1B5B5C5230E357000918DFF /* PropertyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyCell.swift; sourceTree = "<group>"; };
+		D1B5B5C7230EE86500918DFF /* AcquisitionDataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcquisitionDataPoint.swift; sourceTree = "<group>"; };
+		D1B5B5C9230EE8E700918DFF /* ConversionDataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionDataPoint.swift; sourceTree = "<group>"; };
 		D1E2BC1B230B1152001EF5C1 /* RISE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RISE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1E2BC1E230B1152001EF5C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D1E2BC23230B1152001EF5C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -221,6 +231,8 @@
 			isa = PBXGroup;
 			children = (
 				D1E2BC77230CB454001EF5C1 /* PropertyListVC.swift */,
+				D1B5B5C3230E351600918DFF /* PropertyCell.xib */,
+				D1B5B5C5230E357000918DFF /* PropertyCell.swift */,
 			);
 			path = "property list";
 			sourceTree = "<group>";
@@ -241,6 +253,9 @@
 			isa = PBXGroup;
 			children = (
 				D1E2BC73230B8A0A001EF5C1 /* TestModel.swift */,
+				D1B5B5C1230E34B500918DFF /* Listing.swift */,
+				D1B5B5C7230EE86500918DFF /* AcquisitionDataPoint.swift */,
+				D1B5B5C9230EE8E700918DFF /* ConversionDataPoint.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -415,6 +430,7 @@
 				D1E2BC26230B1156001EF5C1 /* Assets.xcassets in Resources */,
 				D1E2BC76230C8686001EF5C1 /* PriceHistoryGraph.xib in Resources */,
 				D1E2BC24230B1152001EF5C1 /* Main.storyboard in Resources */,
+				D1B5B5C4230E351600918DFF /* PropertyCell.xib in Resources */,
 				D1E2BC67230B6060001EF5C1 /* OverviewView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -550,12 +566,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1E2BC78230CB454001EF5C1 /* PropertyListVC.swift in Sources */,
+				D1B5B5C8230EE86500918DFF /* AcquisitionDataPoint.swift in Sources */,
 				D1E2BC5A230B5B55001EF5C1 /* AcquisitionView.swift in Sources */,
+				D1B5B5C6230E357000918DFF /* PropertyCell.swift in Sources */,
 				D1E2BC5D230B5CCC001EF5C1 /* NibView.swift in Sources */,
 				D1E2BC55230B56C9001EF5C1 /* DashboardVC.swift in Sources */,
 				D1B5B5C0230DF3EE00918DFF /* Enums.swift in Sources */,
 				D1E2BC6E230B7144001EF5C1 /* RiseApi.swift in Sources */,
 				D1E2BC74230B8A0A001EF5C1 /* TestModel.swift in Sources */,
+				D1B5B5C2230E34B500918DFF /* Listing.swift in Sources */,
+				D1B5B5CA230EE8E700918DFF /* ConversionDataPoint.swift in Sources */,
 				D1E2BC69230B610F001EF5C1 /* OverviewView.swift in Sources */,
 				D1E2BC6C230B671D001EF5C1 /* NavigationController.swift in Sources */,
 				D1E2BC1F230B1152001EF5C1 /* AppDelegate.swift in Sources */,

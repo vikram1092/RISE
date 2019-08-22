@@ -7,3 +7,4 @@ class TestModel: ImmutableMappable {
         ping = try map.value("ping")
     }
 }
+

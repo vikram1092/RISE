@@ -58,6 +58,7 @@ class DashboardVC: UIViewController {
     }
     
     func setupViews() {
+        
         overviewViewContainer.addSubview(overviewView)
         acqViewContainer.addSubview(acqView)
         conversionViewContainer.addSubview(conversionView)
@@ -133,6 +134,7 @@ class DashboardVC: UIViewController {
     }
     
     func changeToState(state: DashboardState) {
+        
         switch state {
         case .Performance:
             view.bringSubviewToFront(overviewViewContainer)
