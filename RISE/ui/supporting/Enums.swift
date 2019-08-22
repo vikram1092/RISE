@@ -28,7 +28,7 @@ public enum DetailMode: String, CaseIterable {
     case Exposure = "exposure"
     case Interests = "positive_interests"
     case Contacts = "contacts"
-    case Leases = "leases"
+    case Rank = "rank"
     
     func name() -> String {
         switch self {
@@ -38,8 +38,8 @@ public enum DetailMode: String, CaseIterable {
             return "Positive Interests"
         case .Contacts:
             return "Contacts"
-        case .Leases:
-            return "Leases"
+        case .Rank:
+            return "Rank"
         }
     }
     
@@ -102,11 +102,11 @@ enum Duration: Int, CaseIterable {
     func name() -> String {
         switch self {
         case .Ninety:
-            return "Ninety days"
+            return "90 days"
         case .Sixty:
-            return "Sixty days"
+            return "60 days"
         case .Thirty:
-            return "Thirty days"
+            return "30 days"
         }
     }
     

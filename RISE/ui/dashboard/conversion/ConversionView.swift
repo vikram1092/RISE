@@ -2,21 +2,27 @@ import UIKit
 import iOSDropDown
 import Charts
 
+// Now called Competition
 class ConversionView: UIView, NibView {
     static var className: String = "ConversionView"
     @IBOutlet weak var priceHistoryContainer: UIView!
     @IBOutlet weak var modeDropDown: DropDown!
     @IBOutlet weak var mileageDropDown: DropDown!
+    @IBOutlet weak var graphTitle: UILabel!
     
     var priceHistoryGraph: PriceHistoryGraph!
     var detailMode: DetailMode = .Interests
     var mileageMode: MileageMode = .Two
+    var listing: DetailedListing?
+    var durationMode: Duration = .Ninety
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    func bindTo() {
+    func bindTo(_ listing: DetailedListing, durationMode: Duration) {
+        self.listing = listing
+        self.durationMode = durationMode
         modeDropDown.optionArray = DetailMode.allCases.map { $0.name() }
         mileageDropDown.optionArray = MileageMode.allCases.map { $0.name() }
         
@@ -55,17 +61,30 @@ class ConversionView: UIView, NibView {
     }
     
     func loadData() {
-        let dateRange: [Int] = Array(0...90)
+        guard let listing = listing else { return }
+        let dateRange: [Int] = Array(0...durationMode.rawValue)
         var dataEntries: [ChartDataEntry] = []
         dateRange.forEach {
-            let randomPrice: Int = (700...1500).randomElement() ?? 750
-            let dataEntry = ChartDataEntry(x: Double($0), y: Double(randomPrice))
+            var yValue: Int!
+            switch detailMode {
+            case .Contacts:
+                yValue = listing.avgContactsPerDay[$0]
+            case .Exposure:
+                yValue = listing.avgExposurePerDay[$0]
+            case .Interests:
+                yValue = listing.avgInterestsPerDay[$0]
+            case .Rank:
+                yValue = listing.avgRankPerDay[$0]
+            }
+            let dataEntry = ChartDataEntry(x: Double($0-durationMode.rawValue),
+                                           y: Double(yValue))
             dataEntries.append(dataEntry)
         }
         
-        let chartSet = LineChartDataSet(entries: dataEntries, label: "Prices")
-        chartSet.colors = [Color.burple()]
-        chartSet.setCircleColor(Color.burple())
+        let chartSet = LineChartDataSet(entries: dataEntries, label: detailMode.name())
+        let color = Color.burple()
+        chartSet.colors = [color]
+        chartSet.setCircleColor(color)
         chartSet.circleRadius = 1
         chartSet.drawCircleHoleEnabled = false
         chartSet.lineWidth = 2
@@ -75,5 +94,7 @@ class ConversionView: UIView, NibView {
         priceHistoryGraph.bindTo(dataSets: [chartSet])
         setNeedsLayout()
         layoutIfNeeded()
+        
+        graphTitle.text = "\(detailMode.name()) for the last \(durationMode.name())"
     }
 }

@@ -29,11 +29,21 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jOD-eF-3z0">
+                            <rect key="frame" x="60" y="16" width="628" height="43"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="OYg-DF-q9B" firstAttribute="leading" secondItem="jOD-eF-3z0" secondAttribute="trailing" constant="16" id="4jd-d0-yro"/>
                         <constraint firstAttribute="height" constant="367" id="9uv-be-DVd"/>
+                        <constraint firstItem="jOD-eF-3z0" firstAttribute="leading" secondItem="aMz-p8-uVd" secondAttribute="leading" constant="60" id="Lwz-1n-4K5"/>
                         <constraint firstItem="OYg-DF-q9B" firstAttribute="top" secondItem="aMz-p8-uVd" secondAttribute="top" constant="16" id="YlD-OJ-0YV"/>
+                        <constraint firstItem="jOD-eF-3z0" firstAttribute="height" secondItem="OYg-DF-q9B" secondAttribute="height" id="kd5-9F-K9N"/>
+                        <constraint firstItem="jOD-eF-3z0" firstAttribute="top" secondItem="aMz-p8-uVd" secondAttribute="top" constant="16" id="wTw-Wm-o47"/>
                         <constraint firstAttribute="trailing" secondItem="OYg-DF-q9B" secondAttribute="trailing" constant="16" id="xPT-tO-wsb"/>
                     </constraints>
                 </view>
@@ -42,7 +52,6 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="280" id="6QE-Z2-q2h"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="280" id="FWq-vS-Ac6"/>
                     </constraints>
                 </view>
             </subviews>
@@ -60,6 +69,7 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="bedroomDropDown" destination="OYg-DF-q9B" id="hYF-UX-eXF"/>
+                <outlet property="graphTitle" destination="jOD-eF-3z0" id="Kz5-7l-4t4"/>
                 <outlet property="priceHistoryContainer" destination="bAN-ZB-XCP" id="sKs-qF-yb1"/>
             </connections>
             <point key="canvasLocation" x="147.48201438848923" y="-9.442446043165468"/>

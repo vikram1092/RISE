@@ -23,7 +23,7 @@ struct Color {
     static func rose() -> UIColor { return colorFromHex(0xC26B84) }
     static func lavender() -> UIColor { return colorFromHex(0xAE85D4) }
     static func red() -> UIColor { return colorFromHex(0xFC5D77) }
-    
+    static func yellow() -> UIColor { return colorFromHex(0xF4BF55) }
     static func blue() -> UIColor { return colorFromHex(0x0A9ED8) }
     static func green() -> UIColor { return colorFromHex(0x00B1A6) }
     static func lilac() -> UIColor { return colorFromHex(0x7F7CBA) }

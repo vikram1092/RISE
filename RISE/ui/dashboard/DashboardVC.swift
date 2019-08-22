@@ -36,7 +36,7 @@ class DashboardVC: UIViewController {
     let conversionView = ConversionView.viewFromNib()
     let riseApi = RiseApi.shared
     var rentalId: String = ""
-    var listing: DetailedListing!
+    var listing: DetailedListing? = nil
     var durationMode: Duration = .Ninety {
         didSet {
             updateForDurationMode()
@@ -148,41 +148,57 @@ class DashboardVC: UIViewController {
     func bindTo(_ listing: DetailedListing) {
         self.listing = listing
         DispatchQueue.main.async {
-            self.propertyNameLabel.text = self.listing.name
             self.durationDropDown.selectedIndex = 0
             self.durationDropDown.text = Duration.Ninety.name()
+            self.updateSectionsForListing()
             self.updateForDurationMode()
+            guard let listing = self.listing else { return }
+            self.propertyNameLabel.text = listing.name
         }
     }
     
+    func updateSectionsForListing() {
+        guard let listing = listing else { return }
+        overviewView.bindTo(listing)
+        acqView.bindTo(listing)
+        conversionView.bindTo(listing, durationMode: durationMode)
+    }
+    
     func updateForDurationMode() {
+        guard let listing = listing else { return }
         var selectedLeaseCount = String(listing.leaseCount90Day)
         var selectedInterestCount = String(listing.interestCount90Day)
         var selectedImpressionCount = String(listing.viewCount90Day)
         var selectedContactCount = String(listing.contactCount90Day)
+        var selectedRank = String(listing.avgRank90day)
         switch durationMode {
         case .Ninety:
             selectedLeaseCount = String(listing.leaseCount90Day)
             selectedImpressionCount = String(listing.viewCount90Day)
             selectedContactCount = String(listing.contactCount90Day)
             selectedInterestCount = String(listing.interestCount90Day)
+            selectedRank = String(listing.avgRank90day)
         case .Sixty:
             selectedLeaseCount = String(listing.leaseCount60Day)
             selectedImpressionCount = String(listing.viewCount60Day)
             selectedContactCount = String(listing.contactCount60Day)
             selectedInterestCount = String(listing.interestCount60Day)
+            selectedRank = String(listing.avgRank60day)
         case .Thirty:
             selectedLeaseCount = String(listing.leaseCount30Day)
             selectedImpressionCount = String(listing.viewCount30Day)
             selectedContactCount = String(listing.contactCount30Day)
             selectedInterestCount = String(listing.interestCount30Day)
+            selectedRank = String(listing.avgRank30day)
         }
         
         leasesLabel.text = selectedLeaseCount + " Leases"
         title1.text = selectedImpressionCount
         title2.text = selectedInterestCount
         title3.text = selectedContactCount
+        title4.text = selectedRank
         
+        conversionView.bindTo(listing, durationMode: durationMode)
     }
     
     func changeToState(state: DashboardState) {
@@ -227,10 +243,6 @@ class DashboardVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        overviewView.bindTo()
-        acqView.bindTo()
-        conversionView.bindTo()
     }
     
     func setupDropdowns() {

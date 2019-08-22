@@ -1,11 +1,23 @@
 import ObjectMapper
 
-class AcquisitionDataPoint: ImmutableMappable {
-    var price: Double
-    var exposure: Double
+class AcquisitionData: ImmutableMappable {
+    var list: [AcquisitionDataSet]
     
     required init(map: Map) throws {
-        price = try map.value("price")
-        exposure = try map.value("exposure")
+        list = try map.value("reverse_search_json")
+    }
+}
+
+class AcquisitionDataSet: ImmutableMappable {
+    var bed: Int
+    var currentPrice: Int
+    var currentExposure: Int
+    var exposures: [String: Int]
+    
+    required init(map: Map) throws {
+        bed = try map.value("bed")
+        currentPrice = try map.value("price")
+        currentExposure = try map.value("users")
+        exposures = try map.value("price_user_predictions")
     }
 }

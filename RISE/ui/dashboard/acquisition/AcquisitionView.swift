@@ -2,11 +2,14 @@ import UIKit
 import iOSDropDown
 import Charts
 
+// Now called Market Pricing
 class AcquisitionView: UIView, NibView {
     static var className: String = "AcquisitionView"
     @IBOutlet weak var priceHistoryContainer: UIView!
     @IBOutlet weak var bedroomDropDown: DropDown!
+    @IBOutlet weak var graphTitle: UILabel!
     
+    var listing: DetailedListing?
     var priceHistoryGraph: PriceHistoryGraph!
     var bedroomMode: BedroomSize = .One
     
@@ -14,8 +17,14 @@ class AcquisitionView: UIView, NibView {
         super.init(coder: aDecoder)
     }
     
-    func bindTo() {
-        bedroomDropDown.optionArray = BedroomSize.allCases.map { $0.name() }
+    func bindTo(_ listing: DetailedListing) {
+        self.listing = listing
+        bedroomDropDown.optionArray = BedroomSize.allCases
+            .filter { option in
+                return listing.acquisitionData.contains(where: { set -> Bool in
+                return option.rawValue == set.bed
+            })}
+            .map { $0.name() }
         
         [bedroomDropDown].forEach {
             $0?.borderColor = Color.lightGray()
@@ -46,7 +55,7 @@ class AcquisitionView: UIView, NibView {
     }
     
     func loadData() {
-        let dateRange: [Int] = Array(0...90)
+        let dateRange: [Int] = Array(-90...0)
         var dataEntries: [ChartDataEntry] = []
         dateRange.forEach {
             let randomPrice: Int = (700...1500).randomElement() ?? 750
@@ -55,9 +64,10 @@ class AcquisitionView: UIView, NibView {
             dataEntries.append(dataEntry)
         }
         
-        let chartSet = LineChartDataSet(entries: dataEntries, label: "Exposure")
-        chartSet.colors = [Color.blue()]
-        chartSet.setCircleColor(Color.blue())
+        let chartSet = LineChartDataSet(entries: dataEntries, label: "Property Price")
+        let color = Color.blue()
+        chartSet.colors = [color]
+        chartSet.setCircleColor(color)
         chartSet.circleRadius = 1
         chartSet.drawCircleHoleEnabled = false
         chartSet.lineWidth = 2
@@ -67,5 +77,7 @@ class AcquisitionView: UIView, NibView {
         priceHistoryGraph.bindTo(dataSets: [chartSet])
         setNeedsLayout()
         layoutIfNeeded()
+        
+        graphTitle.text = "Property Price vs Avg. Neighborhood Price"
     }
 }
