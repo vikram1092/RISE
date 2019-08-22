@@ -13,27 +13,41 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" restorationIdentifier="PriceHistoryGraph" id="iN0-l3-epB" customClass="PriceHistoryGraph" customModule="RISE" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="728" height="487"/>
+            <rect key="frame" x="0.0" y="0.0" width="860" height="367"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cdU-Dw-Sze" customClass="LineChartView" customModule="Charts">
-                    <rect key="frame" x="0.0" y="0.0" width="728" height="487"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JKz-3X-mJd">
+                    <rect key="frame" x="0.0" y="0.0" width="860" height="367"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="367" id="C3U-vf-Lxx"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QKy-tg-y8z" customClass="LineChartView" customModule="Charts">
+                    <rect key="frame" x="16" y="71" width="828" height="280"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="280" id="QC2-ch-Pxa"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="280" id="iCk-bB-05d"/>
+                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="cdU-Dw-Sze" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="G5y-gn-SpO"/>
-                <constraint firstItem="cdU-Dw-Sze" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="G8t-3t-hNf"/>
-                <constraint firstAttribute="bottom" secondItem="cdU-Dw-Sze" secondAttribute="bottom" id="RD4-R7-fR6"/>
-                <constraint firstItem="cdU-Dw-Sze" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="ctS-hn-xX7"/>
+                <constraint firstItem="JKz-3X-mJd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="1s8-aw-p4D"/>
+                <constraint firstAttribute="bottom" secondItem="JKz-3X-mJd" secondAttribute="bottom" id="A6s-g6-eAf"/>
+                <constraint firstItem="JKz-3X-mJd" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="hbR-EC-BqZ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="QKy-tg-y8z" secondAttribute="trailing" constant="16" id="mZq-2I-ozC"/>
+                <constraint firstItem="QKy-tg-y8z" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="rA4-oc-blN"/>
+                <constraint firstItem="JKz-3X-mJd" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="wyk-Ne-Xky"/>
+                <constraint firstAttribute="bottom" secondItem="QKy-tg-y8z" secondAttribute="bottom" constant="16" id="xvt-nN-MKn"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
-                <outlet property="chartView" destination="cdU-Dw-Sze" id="BOk-kt-zBn"/>
+                <outlet property="chartView" destination="QKy-tg-y8z" id="M5C-8U-wvK"/>
             </connections>
-            <point key="canvasLocation" x="365.21739130434787" y="-36.495535714285715"/>
+            <point key="canvasLocation" x="449.27536231884062" y="76.674107142857139"/>
         </view>
     </objects>
 </document>

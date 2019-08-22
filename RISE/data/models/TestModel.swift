@@ -1,7 +1,9 @@
-class TestModel {
+import ObjectMapper
+
+class TestModel: ImmutableMappable {
     let ping: String
     
-    init(withJson json: JSONDict) {
-        ping = json["ping"] as! String
+    required init(map: Map) throws {
+        ping = try map.value("ping")
     }
 }

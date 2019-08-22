@@ -64,7 +64,7 @@ class RiseApi {
     }
     
     func mapTestResponse(json: JSONDict) -> TestModel? {
-        let testModel = TestModel(withJson: json)
+        let testModel = try? TestModel(JSON: json)
         return testModel
     }
 }

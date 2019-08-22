@@ -15,24 +15,9 @@ class PriceHistoryGraph: UIView, NibView {
         super.awakeFromNib()
     }
     
-    func bindTo() {
-        let dateRange: [Int] = Array(0...30)
-        var dataEntries: [ChartDataEntry] = []
-        dateRange.forEach {
-            let randomPrice: Int = (700...1500).randomElement() ?? 750
-            let dataEntry = ChartDataEntry(x: Double($0), y: Double(randomPrice))
-            dataEntries.append(dataEntry)
-        }
+    func bindTo(dataSets: [ChartDataSet]) {
         
-        let chartSet = LineChartDataSet(entries: dataEntries, label: "Prices")
-        chartSet.colors = [Color.slate()]
-        chartSet.setCircleColor(Color.burple())
-        chartSet.circleRadius = 2
-        chartSet.drawCircleHoleEnabled = false
-        chartSet.lineWidth = 2
-        chartSet.mode = .cubicBezier
-        
-        let data = LineChartData(dataSet: chartSet)
+        let data = LineChartData(dataSets: dataSets)
         data.setValueTextColor(Color.lightGray())
         data.setValueFont(.systemFont(ofSize: 9, weight: .medium))
         
@@ -43,19 +28,32 @@ class PriceHistoryGraph: UIView, NibView {
         chartView.drawBordersEnabled = false
         
         chartView.rightAxis.enabled = false
+        let linesWidth: CGFloat = 4
         let leftAxis = chartView.leftAxis
         leftAxis.removeAllLimitLines()
-        leftAxis.drawGridLinesEnabled = false
         leftAxis.drawAxisLineEnabled = true
         leftAxis.labelTextColor = Color.lightGray()
         leftAxis.labelFont = .systemFont(ofSize: 14, weight: .medium)
+        leftAxis.gridColor = Color.offWhite()
+        leftAxis.gridLineWidth = linesWidth
+        leftAxis.gridLineDashPhase = linesWidth
+        leftAxis.gridLineDashLengths = [linesWidth, linesWidth]
+        leftAxis.axisLineWidth = 0
+        leftAxis.axisLineDashPhase = linesWidth
+        leftAxis.axisLineDashLengths = [linesWidth, linesWidth]
+        leftAxis.axisLineColor = Color.offWhite()
         
         let xAxis = chartView.xAxis
         xAxis.removeAllLimitLines()
         xAxis.drawGridLinesEnabled = false
         xAxis.drawAxisLineEnabled = true
+        xAxis.labelPosition = XAxis.LabelPosition.bottom
         xAxis.labelTextColor = Color.lightGray()
         xAxis.labelFont = .systemFont(ofSize: 14, weight: .medium)
+        xAxis.axisLineWidth = linesWidth
+        xAxis.axisLineDashPhase = linesWidth
+        xAxis.axisLineDashLengths = [linesWidth, linesWidth]
+        xAxis.axisLineColor = Color.offWhite()
         
         let legend = chartView.legend
         legend.textColor = Color.lightGray()

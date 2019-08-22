@@ -13,41 +13,67 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" restorationIdentifier="ConversionView" id="iN0-l3-epB" customClass="ConversionView" customModule="RISE" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="944" height="600"/>
+            <rect key="frame" x="0.0" y="0.0" width="860" height="367"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Competition" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DnY-kk-mHI">
-                    <rect key="frame" x="40" y="40" width="864" height="87"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6q6-Jb-D4C">
+                    <rect key="frame" x="0.0" y="0.0" width="860" height="367"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vr1-nJ-w9C" customClass="DropDown" customModule="iOSDropDown">
+                            <rect key="frame" x="674" y="16" width="170" height="43"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="43" id="OkF-J4-whN"/>
+                                <constraint firstAttribute="width" constant="170" id="kMz-Gf-6Tr"/>
+                            </constraints>
+                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gpe-ZX-bwm" customClass="DropDown" customModule="iOSDropDown">
+                            <rect key="frame" x="529" y="16" width="120" height="43"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="120" id="aTd-Pk-Yez"/>
+                            </constraints>
+                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="87" id="ODg-lB-NZh"/>
+                        <constraint firstItem="vr1-nJ-w9C" firstAttribute="top" secondItem="6q6-Jb-D4C" secondAttribute="top" constant="16" id="1QB-YX-S8m"/>
+                        <constraint firstAttribute="height" constant="367" id="Hzg-iU-Lyy"/>
+                        <constraint firstItem="Gpe-ZX-bwm" firstAttribute="top" secondItem="6q6-Jb-D4C" secondAttribute="top" constant="16" id="JiG-v7-JwA"/>
+                        <constraint firstItem="vr1-nJ-w9C" firstAttribute="leading" secondItem="Gpe-ZX-bwm" secondAttribute="trailing" constant="25" id="UKv-KB-b5f"/>
+                        <constraint firstAttribute="trailing" secondItem="vr1-nJ-w9C" secondAttribute="trailing" constant="16" id="WpA-Bt-qjm"/>
+                        <constraint firstItem="vr1-nJ-w9C" firstAttribute="height" secondItem="Gpe-ZX-bwm" secondAttribute="height" id="ZSh-bN-4s4"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="60"/>
-                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="whD-8s-dhG">
-                    <rect key="frame" x="16" y="143" width="912" height="320"/>
+                    <rect key="frame" x="16" y="71" width="828" height="280"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="320" id="oG2-bx-Aml"/>
+                        <constraint firstAttribute="height" constant="280" id="oG2-bx-Aml"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="DnY-kk-mHI" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="DKu-fV-Ob2"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="6q6-Jb-D4C" secondAttribute="trailing" id="7RB-cL-ZN3"/>
                 <constraint firstItem="whD-8s-dhG" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="Inh-Go-fVa"/>
-                <constraint firstItem="whD-8s-dhG" firstAttribute="top" secondItem="DnY-kk-mHI" secondAttribute="bottom" constant="16" id="ZmB-gi-LU5"/>
+                <constraint firstItem="6q6-Jb-D4C" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="XFL-1m-yHc"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="whD-8s-dhG" secondAttribute="trailing" constant="16" id="aOT-94-FZ2"/>
-                <constraint firstItem="DnY-kk-mHI" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="40" id="p2s-p7-Vjs"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="DnY-kk-mHI" secondAttribute="trailing" constant="40" id="qdq-rV-ofF"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="whD-8s-dhG" secondAttribute="bottom" constant="16" id="iGf-zQ-miB"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="6q6-Jb-D4C" secondAttribute="bottom" id="iyR-yf-b9z"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="mileageDropDown" destination="Gpe-ZX-bwm" id="Uqa-54-Rte"/>
+                <outlet property="modeDropDown" destination="vr1-nJ-w9C" id="aup-rx-neW"/>
                 <outlet property="priceHistoryContainer" destination="whD-8s-dhG" id="bnJ-fP-REw"/>
             </connections>
-            <point key="canvasLocation" x="177.69784172661872" y="-9.1726618705035978"/>
+            <point key="canvasLocation" x="179.85611510791369" y="-14.838129496402878"/>
         </view>
     </objects>
 </document>

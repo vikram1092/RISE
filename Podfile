@@ -9,6 +9,8 @@ target 'RISE' do
   
   pod 'Charts'
   pod 'Alamofire'
+  pod 'iOSDropDown'
+  pod 'ObjectMapper'
 
   # Rx
   pod 'RxSwift'

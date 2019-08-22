@@ -8,7 +8,5 @@ class NavigationController: UINavigationController {
     }
     
     func setupViews() {
-        hidesBarsOnSwipe = true
-        navigationBar.prefersLargeTitles = true
     }
 }

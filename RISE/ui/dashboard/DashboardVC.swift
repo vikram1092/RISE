@@ -8,6 +8,7 @@ enum DashboardState {
 }
 
 class DashboardVC: UIViewController {
+    @IBOutlet weak var propertyNameLabel: UILabel!
     @IBOutlet weak var overviewViewContainer: UIView!
     @IBOutlet weak var acqViewContainer: UIView!
     @IBOutlet weak var conversionViewContainer: UIView!
@@ -15,6 +16,22 @@ class DashboardVC: UIViewController {
     @IBOutlet weak var performanceButton: UIButton!
     @IBOutlet weak var geographyButton: UIButton!
     @IBOutlet weak var competitionButton: UIButton!
+    @IBOutlet weak var performanceUnderscore: UIView!
+    @IBOutlet weak var geographyUnderscore: UIView!
+    @IBOutlet weak var competitionUnderscore: UIView!
+    
+    @IBOutlet weak var view1: UIView!
+    @IBOutlet weak var view2: UIView!
+    @IBOutlet weak var view3: UIView!
+    @IBOutlet weak var view4: UIView!
+    @IBOutlet weak var title1: UILabel!
+    @IBOutlet weak var title2: UILabel!
+    @IBOutlet weak var title3: UILabel!
+    @IBOutlet weak var title4: UILabel!
+    @IBOutlet weak var subtitle1: UILabel!
+    @IBOutlet weak var subtitle2: UILabel!
+    @IBOutlet weak var subtitle3: UILabel!
+    @IBOutlet weak var subtitle4: UILabel!
     
     let overviewView = OverviewView.viewFromNib()
     let acqView = AcquisitionView.viewFromNib()
@@ -49,15 +66,16 @@ class DashboardVC: UIViewController {
         backButton.setImage(backImage, for: .normal)
         backButton.tintColor = Color.slate()
         
-        let radius: CGFloat = 0
-        overviewViewContainer.layer.cornerRadius = radius
-        overviewViewContainer.clipsToBounds = true
+        let radius: CGFloat = 8
+        [overviewViewContainer, acqViewContainer, conversionViewContainer,
+         view1, view2, view3, view4].forEach {
+            $0?.layer.borderColor = Color.lightGray().cgColor
+            $0?.layer.borderWidth = 1
+            $0?.layer.cornerRadius = radius
+            $0?.clipsToBounds = true
+        }
         
-        acqViewContainer.layer.cornerRadius = radius
-        acqViewContainer.clipsToBounds = true
-        
-        conversionViewContainer.layer.cornerRadius = radius
-        conversionViewContainer.clipsToBounds = true
+        changeToState(state: .Competition)
     }
     
     func setupButtons() {
@@ -118,11 +136,28 @@ class DashboardVC: UIViewController {
         switch state {
         case .Performance:
             view.bringSubviewToFront(overviewViewContainer)
+            overviewViewContainer.isHidden = false
+            acqViewContainer.isHidden = true
+            conversionViewContainer.isHidden = true
         case .Geography:
             view.bringSubviewToFront(acqViewContainer)
+            overviewViewContainer.isHidden = true
+            acqViewContainer.isHidden = false
+            conversionViewContainer.isHidden = true
         case .Competition:
             view.bringSubviewToFront(conversionViewContainer)
+            overviewViewContainer.isHidden = true
+            acqViewContainer.isHidden = true
+            conversionViewContainer.isHidden = false
         }
+        
+        underscoreFor(state: state)
+    }
+    
+    func underscoreFor(state: DashboardState) {
+        performanceUnderscore.isHidden = !(state == .Performance)
+        geographyUnderscore.isHidden = !(state == .Geography)
+        competitionUnderscore.isHidden = !(state == .Competition)
     }
     
     override func viewWillLayoutSubviews() {
