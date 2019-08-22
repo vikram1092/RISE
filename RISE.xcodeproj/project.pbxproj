@@ -16,6 +16,11 @@
 		D1B5B5C6230E357000918DFF /* PropertyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B5B5C5230E357000918DFF /* PropertyCell.swift */; };
 		D1B5B5C8230EE86500918DFF /* AcquisitionDataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B5B5C7230EE86500918DFF /* AcquisitionDataPoint.swift */; };
 		D1B5B5CA230EE8E700918DFF /* ConversionDataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B5B5C9230EE8E700918DFF /* ConversionDataPoint.swift */; };
+		D1B5B5CC230F05BF00918DFF /* PhotoFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B5B5CB230F05BF00918DFF /* PhotoFetcher.swift */; };
+		D1B5B5CE230F05FB00918DFF /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B5B5CD230F05FB00918DFF /* Photo.swift */; };
+		D1B5B5D0230F06D300918DFF /* JSONExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B5B5CF230F06D300918DFF /* JSONExtractor.swift */; };
+		D1B5B5D2230F0FBC00918DFF /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B5B5D1230F0FBC00918DFF /* Date.swift */; };
+		D1B5B5D4230F129B00918DFF /* DetailedListing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B5B5D3230F129B00918DFF /* DetailedListing.swift */; };
 		D1E2BC1F230B1152001EF5C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E2BC1E230B1152001EF5C1 /* AppDelegate.swift */; };
 		D1E2BC24230B1152001EF5C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1E2BC22230B1152001EF5C1 /* Main.storyboard */; };
 		D1E2BC26230B1156001EF5C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1E2BC25230B1156001EF5C1 /* Assets.xcassets */; };
@@ -71,6 +76,11 @@
 		D1B5B5C5230E357000918DFF /* PropertyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyCell.swift; sourceTree = "<group>"; };
 		D1B5B5C7230EE86500918DFF /* AcquisitionDataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcquisitionDataPoint.swift; sourceTree = "<group>"; };
 		D1B5B5C9230EE8E700918DFF /* ConversionDataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionDataPoint.swift; sourceTree = "<group>"; };
+		D1B5B5CB230F05BF00918DFF /* PhotoFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFetcher.swift; sourceTree = "<group>"; };
+		D1B5B5CD230F05FB00918DFF /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		D1B5B5CF230F06D300918DFF /* JSONExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONExtractor.swift; sourceTree = "<group>"; };
+		D1B5B5D1230F0FBC00918DFF /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		D1B5B5D3230F129B00918DFF /* DetailedListing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedListing.swift; sourceTree = "<group>"; };
 		D1E2BC1B230B1152001EF5C1 /* RISE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RISE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1E2BC1E230B1152001EF5C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D1E2BC23230B1152001EF5C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -213,6 +223,9 @@
 			children = (
 				D1E2BC51230B555E001EF5C1 /* api */,
 				D1E2BC50230B555A001EF5C1 /* models */,
+				D1B5B5CB230F05BF00918DFF /* PhotoFetcher.swift */,
+				D1B5B5CD230F05FB00918DFF /* Photo.swift */,
+				D1B5B5CF230F06D300918DFF /* JSONExtractor.swift */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -256,6 +269,7 @@
 				D1B5B5C1230E34B500918DFF /* Listing.swift */,
 				D1B5B5C7230EE86500918DFF /* AcquisitionDataPoint.swift */,
 				D1B5B5C9230EE8E700918DFF /* ConversionDataPoint.swift */,
+				D1B5B5D3230F129B00918DFF /* DetailedListing.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -265,6 +279,7 @@
 			children = (
 				D1E2BC6D230B7144001EF5C1 /* RiseApi.swift */,
 				D1E2BC6F230B77A0001EF5C1 /* SessionManager.swift */,
+				D1B5B5D1230F0FBC00918DFF /* Date.swift */,
 			);
 			path = api;
 			sourceTree = "<group>";
@@ -529,6 +544,8 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-RISE/Pods-RISE-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/Cloudinary/Cloudinary.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAlamofire/RxAlamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
@@ -544,6 +561,8 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cloudinary.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAlamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
@@ -565,9 +584,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1B5B5CC230F05BF00918DFF /* PhotoFetcher.swift in Sources */,
 				D1E2BC78230CB454001EF5C1 /* PropertyListVC.swift in Sources */,
 				D1B5B5C8230EE86500918DFF /* AcquisitionDataPoint.swift in Sources */,
 				D1E2BC5A230B5B55001EF5C1 /* AcquisitionView.swift in Sources */,
+				D1B5B5CE230F05FB00918DFF /* Photo.swift in Sources */,
 				D1B5B5C6230E357000918DFF /* PropertyCell.swift in Sources */,
 				D1E2BC5D230B5CCC001EF5C1 /* NibView.swift in Sources */,
 				D1E2BC55230B56C9001EF5C1 /* DashboardVC.swift in Sources */,
@@ -579,8 +600,11 @@
 				D1E2BC69230B610F001EF5C1 /* OverviewView.swift in Sources */,
 				D1E2BC6C230B671D001EF5C1 /* NavigationController.swift in Sources */,
 				D1E2BC1F230B1152001EF5C1 /* AppDelegate.swift in Sources */,
+				D1B5B5D0230F06D300918DFF /* JSONExtractor.swift in Sources */,
 				D1E2BC63230B5E10001EF5C1 /* Color.swift in Sources */,
+				D1B5B5D4230F129B00918DFF /* DetailedListing.swift in Sources */,
 				D1E2BC5F230B5D25001EF5C1 /* ConversionView.swift in Sources */,
+				D1B5B5D2230F0FBC00918DFF /* Date.swift in Sources */,
 				D1E2BC53230B55BA001EF5C1 /* PriceHistoryGraph.swift in Sources */,
 				D1E2BC70230B77A0001EF5C1 /* SessionManager.swift in Sources */,
 			);

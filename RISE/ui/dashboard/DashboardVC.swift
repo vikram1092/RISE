@@ -1,11 +1,6 @@
 import UIKit
 import RxSwift
-
-enum DashboardState {
-    case Performance
-    case Geography
-    case Competition
-}
+import iOSDropDown
 
 class DashboardVC: UIViewController {
     @IBOutlet weak var propertyNameLabel: UILabel!
@@ -19,6 +14,9 @@ class DashboardVC: UIViewController {
     @IBOutlet weak var performanceUnderscore: UIView!
     @IBOutlet weak var geographyUnderscore: UIView!
     @IBOutlet weak var competitionUnderscore: UIView!
+    @IBOutlet weak var leasesLabel: UILabel!
+    @IBOutlet weak var leasesImage: UIImageView!
+    @IBOutlet weak var durationDropDown: DropDown!
     
     @IBOutlet weak var view1: UIView!
     @IBOutlet weak var view2: UIView!
@@ -37,15 +35,22 @@ class DashboardVC: UIViewController {
     let acqView = AcquisitionView.viewFromNib()
     let conversionView = ConversionView.viewFromNib()
     let riseApi = RiseApi.shared
+    var rentalId: String = ""
+    var listing: DetailedListing!
+    var durationMode: Duration = .Ninety {
+        didSet {
+            updateForDurationMode()
+        }
+    }
     
     let disposables = CompositeDisposable()
     
-    static func make() -> DashboardVC {
+    static func make(rentalId: String = "p37850") -> DashboardVC {
         let vc = UIStoryboard(
             name: "Main",
             bundle: nil).instantiateViewController(withIdentifier: "DashboardVC"
         ) as! DashboardVC
-        
+        vc.rentalId = rentalId
         return vc
     }
     
@@ -67,6 +72,8 @@ class DashboardVC: UIViewController {
         backButton.setImage(backImage, for: .normal)
         backButton.tintColor = Color.slate()
         
+        leasesImage.image = leasesImage.image?.withRenderingMode(.alwaysTemplate)
+        
         let radius: CGFloat = 8
         [overviewViewContainer, acqViewContainer, conversionViewContainer,
          view1, view2, view3, view4].forEach {
@@ -76,6 +83,7 @@ class DashboardVC: UIViewController {
             $0?.clipsToBounds = true
         }
         
+        setupDropdowns()
         changeToState(state: .Competition)
     }
     
@@ -121,16 +129,60 @@ class DashboardVC: UIViewController {
             switch result {
             case .Loading:
                 ()
-            case .Success(let testResponse):
-                print(testResponse)
+            case .Success(let response):
+                guard let listing = RiseApi.mapRentalIdResponse(json: response)
+                    else {
+                        return
+                }
+                self.bindTo(listing)
             case .Failure(let error):
                 print(error)
             }
         }
-        riseApi.testGet(endpoint: "ping",
+        riseApi.request(endpoint: "rental_id/\(rentalId)",
                         method: .get,
                         params: [:],
                         resultHandler: resultHandler)
+    }
+    
+    func bindTo(_ listing: DetailedListing) {
+        self.listing = listing
+        DispatchQueue.main.async {
+            self.propertyNameLabel.text = self.listing.name
+            self.durationDropDown.selectedIndex = 0
+            self.durationDropDown.text = Duration.Ninety.name()
+            self.updateForDurationMode()
+        }
+    }
+    
+    func updateForDurationMode() {
+        var selectedLeaseCount = String(listing.leaseCount90Day)
+        var selectedInterestCount = String(listing.interestCount90Day)
+        var selectedImpressionCount = String(listing.viewCount90Day)
+        var selectedContactCount = String(listing.contactCount90Day)
+        switch durationMode {
+        case .Ninety:
+            selectedLeaseCount = String(listing.leaseCount90Day)
+            selectedImpressionCount = String(listing.viewCount90Day)
+            selectedContactCount = String(listing.contactCount90Day)
+            selectedInterestCount = String(listing.interestCount90Day)
+        case .Sixty:
+            selectedLeaseCount = String(listing.leaseCount60Day)
+            selectedImpressionCount = String(listing.viewCount60Day)
+            selectedContactCount = String(listing.contactCount60Day)
+            selectedInterestCount = String(listing.interestCount60Day)
+        case .Thirty:
+            selectedLeaseCount = String(listing.leaseCount30Day)
+            selectedImpressionCount = String(listing.viewCount30Day)
+            selectedContactCount = String(listing.contactCount30Day)
+            selectedInterestCount = String(listing.interestCount30Day)
+        }
+        
+        leasesLabel.text = selectedLeaseCount + " Leases"
+        title1.text = selectedImpressionCount
+        title2.text = selectedInterestCount
+        title3.text = selectedContactCount
+        
     }
     
     func changeToState(state: DashboardState) {
@@ -179,5 +231,26 @@ class DashboardVC: UIViewController {
         overviewView.bindTo()
         acqView.bindTo()
         conversionView.bindTo()
+    }
+    
+    func setupDropdowns() {
+        
+        durationDropDown.optionArray = Duration.allCases.map { $0.name() }
+        
+        [durationDropDown].forEach {
+            $0?.borderColor = Color.lightGray()
+            $0?.borderWidth = 1
+            $0?.cornerRadius = 3
+            $0?.clipsToBounds = true
+            $0?.arrowColor = Color.burple()
+            $0?.selectedRowColor = Color.offWhite()
+            $0?.checkMarkEnabled = false
+            $0?.isSearchEnable = false
+            $0?.setNeedsLayout()
+        }
+        
+        durationDropDown.didSelect { [weak self] (selectedText, index ,id) in
+            self?.durationMode = Duration.from(name: selectedText)
+        }
     }
 }

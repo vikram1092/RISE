@@ -11,6 +11,8 @@ target 'RISE' do
   pod 'Alamofire'
   pod 'iOSDropDown'
   pod 'ObjectMapper'
+  pod 'Cloudinary', '~> 1.0.15'
+  pod 'Kingfisher'
 
   # Rx
   pod 'RxSwift'

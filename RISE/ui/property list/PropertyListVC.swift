@@ -32,18 +32,6 @@ class PropertyListVC: UIViewController {
     @IBOutlet weak var bigView1: UIView!
     @IBOutlet weak var bigView2: UIView!
     @IBOutlet weak var bigView3: UIView!
-    @IBOutlet weak var property1Label: UILabel!
-    @IBOutlet weak var property2Label: UILabel!
-    @IBOutlet weak var property3Label: UILabel!
-    @IBOutlet weak var city1Label: UILabel!
-    @IBOutlet weak var city2Label: UILabel!
-    @IBOutlet weak var city3Label: UILabel!
-    @IBOutlet weak var units1Label: UILabel!
-    @IBOutlet weak var units2Label: UILabel!
-    @IBOutlet weak var units3Label: UILabel!
-    @IBOutlet weak var view1Button: UIButton!
-    @IBOutlet weak var view2Button: UIButton!
-    @IBOutlet weak var view3Button: UIButton!
     
     let disposables = CompositeDisposable()
     
@@ -54,6 +42,7 @@ class PropertyListVC: UIViewController {
     }
     var coloradoProperties: [Listing] = sampleColoradoData
     var texasProperties: [Listing] = sampleTexasData
+    let riseApi = RiseApi.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +71,8 @@ class PropertyListVC: UIViewController {
         image2.image = image2.image?.withRenderingMode(.alwaysTemplate)
         image3.image = image3.image?.withRenderingMode(.alwaysTemplate)
         changeToTab(tab: .First)
+        
+        hitApi()
     }
     
     func setupButtons() {
@@ -170,9 +161,20 @@ class PropertyListVC: UIViewController {
         case .Colorado:
             propertiesLabel.text = "Colorado Properties"
             showPropertiesFor(.Colorado)
+            mapImageView.image = UIImage(named: "usa map")
         case .Texas:
             propertiesLabel.text = "Texas Properties"
             showPropertiesFor(.Texas)
+            mapImageView.image = UIImage(named: "usa map 2")
+        }
+    }
+    
+    func handleListings(_ listings: [Listing], state: StateState) {
+        switch state {
+        case .Colorado:
+            coloradoProperties = listings
+        case .Texas:
+            texasProperties = listings
         }
     }
     
@@ -180,9 +182,55 @@ class PropertyListVC: UIViewController {
         propertyCollectionView.reloadData()
     }
     
-    func goToDashboard() {
-        let vc = DashboardVC.make()
+    func goToDashboard(rentalId: String) {
+        let vc = DashboardVC.make(rentalId: rentalId)
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func hitApi() {
+        
+        let denverResultBlock: ResultBlock = { result in
+            switch result {
+            case .Loading:
+                ()
+            case .Success(let listingDict):
+                print(listingDict)
+                guard let listings = RiseApi.mapListingsResponse(json: listingDict)
+                    else {
+                        return
+                }
+                self.handleListings(listings, state: .Colorado)
+                DispatchQueue.main.async {
+                    self.propertyCollectionView.reloadData()
+                }
+            case .Failure(let error):
+                print(error)
+            }
+        }
+        
+        let houstonResultBlock: ResultBlock = { result in
+            switch result {
+            case .Loading:
+                ()
+            case .Success(let listingDict):
+                print(listingDict)
+                guard let listings = RiseApi.mapListingsResponse(json: listingDict)
+                    else {
+                        return
+                }
+                self.handleListings(listings, state: .Texas)
+            case .Failure(let error):
+                print(error)
+            }
+        }
+        
+        riseApi.request(endpoint: "metro/houston",
+                        method: .get,
+                        params: [:], resultHandler: houstonResultBlock)
+        
+        riseApi.request(endpoint: "metro/denver",
+                        method: .get,
+                        params: [:], resultHandler: denverResultBlock)
     }
 }
 
@@ -215,24 +263,24 @@ extension PropertyListVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch state {
         case .Colorado:
-            goToDashboard()
+            let id = coloradoProperties[indexPath.item].rentalId
+            goToDashboard(rentalId: id)
         case .Texas:
-            goToDashboard()
+            let id = texasProperties[indexPath.item].rentalId
+            goToDashboard(rentalId: id)
         }
     }
 }
 
-
-
 let sampleColoradoData: [Listing] = try! [
-    Listing(JSON: ["name":"Avalon", "imageUrl":""]),
-    Listing(JSON: ["name":"Eaves", "imageUrl":""]),
-    Listing(JSON: ["name":"Parkland", "imageUrl":""]),
-    Listing(JSON: ["name":"Haven", "imageUrl":""]),
+    Listing(JSON: ["name":"Avalon", "image":"", "rental_id": ""]),
+    Listing(JSON: ["name":"Eaves", "image":"", "rental_id": ""]),
+    Listing(JSON: ["name":"Parkland", "image":"", "rental_id": ""]),
+    Listing(JSON: ["name":"Haven", "image":"", "rental_id": ""]),
 ]
 
 let sampleTexasData: [Listing] = try! [
-    Listing(JSON: ["name":"The Ranch", "imageUrl":""]),
-    Listing(JSON: ["name":"Houstoner", "imageUrl":""]),
-    Listing(JSON: ["name":"The Barn Lofts", "imageUrl":""]),
+    Listing(JSON: ["name":"The Ranch", "image":"", "rental_id": ""]),
+    Listing(JSON: ["name":"Houstoner", "image":"", "rental_id": ""]),
+    Listing(JSON: ["name":"The Barn Lofts", "image":"", "rental_id": ""]),
 ]

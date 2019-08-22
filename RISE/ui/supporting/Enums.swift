@@ -1,3 +1,4 @@
+
 public enum BedroomSize: Int, CaseIterable {
     case Zero = 0
     case One
@@ -73,5 +74,44 @@ public enum MileageMode: Int, CaseIterable {
     static func from(name: String) -> MileageMode {
         return MileageMode.allCases
             .first(where: { $0.name() == name }) ?? MileageMode.One
+    }
+}
+
+enum DateFormat: String {
+    case kDateFormat = "yyyy-MM-dd"
+    case kTimeFormat = "h:mma"
+    case kUTCFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXX"
+    case kDayFormat = "EEEE"
+    case k24HourTimeFormat = "HH:mm"
+    case kMonthDayFormat = "EEEE, MMM dd, yyyy"
+    case kMonthDayAtHourFormat = "MMMM d 'at' h:mm a"
+    case kMonthDateFormat = "MMM d"
+}
+
+enum DashboardState {
+    case Performance
+    case Geography
+    case Competition
+}
+
+enum Duration: Int, CaseIterable {
+    case Ninety = 90
+    case Sixty = 60
+    case Thirty = 30
+    
+    func name() -> String {
+        switch self {
+        case .Ninety:
+            return "Ninety days"
+        case .Sixty:
+            return "Sixty days"
+        case .Thirty:
+            return "Thirty days"
+        }
+    }
+    
+    static func from(name: String) -> Duration {
+        return Duration.allCases
+            .first(where: { $0.name() == name }) ?? Duration.Ninety
     }
 }

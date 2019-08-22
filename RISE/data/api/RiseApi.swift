@@ -53,7 +53,7 @@ class RiseApi {
     fileprivate let baseUrl = "https://alx-rise.herokuapp.com"
     fileprivate var sessionManager = APISessionManager()
     
-    func testGet(endpoint: String,
+    func request(endpoint: String,
                  method: HTTPMethod,
                  params: JSONDict,
                  resultHandler: @escaping ResultBlock) {
@@ -63,8 +63,18 @@ class RiseApi {
                                    completion: resultHandler)
     }
     
-    func mapTestResponse(json: JSONDict) -> TestModel? {
-        let testModel = try? TestModel(JSON: json)
+    static func mapTestResponse(json: JSONDict) -> TestModel? {
+        let testModel = try! TestModel(JSON: json)
         return testModel
+    }
+    
+    static func mapListingsResponse(json: JSONDict) -> [Listing]? {
+        let listings = try! Listings(JSON: json)
+        return listings.list
+    }
+    
+    static func mapRentalIdResponse(json: JSONDict) -> DetailedListing? {
+        let listing = try! DetailedListing(JSON: json)
+        return listing
     }
 }
