@@ -11,9 +11,6 @@ class DashboardVC: UIViewController {
     @IBOutlet weak var performanceButton: UIButton!
     @IBOutlet weak var geographyButton: UIButton!
     @IBOutlet weak var competitionButton: UIButton!
-    @IBOutlet weak var performanceUnderscore: UIView!
-    @IBOutlet weak var geographyUnderscore: UIView!
-    @IBOutlet weak var competitionUnderscore: UIView!
     @IBOutlet weak var leasesLabel: UILabel!
     @IBOutlet weak var leasesImage: UIImageView!
     @IBOutlet weak var durationDropDown: DropDown!
@@ -160,7 +157,7 @@ class DashboardVC: UIViewController {
     func updateSectionsForListing() {
         guard let listing = listing else { return }
         overviewView.bindTo(listing)
-        acqView.bindTo(listing)
+        acqView.bindTo(listing, duration: durationMode)
         conversionView.bindTo(listing, durationMode: durationMode)
     }
     
@@ -198,7 +195,7 @@ class DashboardVC: UIViewController {
         title3.text = selectedContactCount
         title4.text = selectedRank
         
-        conversionView.bindTo(listing, durationMode: durationMode)
+        updateSectionsForListing()
     }
     
     func changeToState(state: DashboardState) {
@@ -221,13 +218,30 @@ class DashboardVC: UIViewController {
             conversionViewContainer.isHidden = false
         }
         
-        underscoreFor(state: state)
+        buttonHighlightFor(state: state)
     }
     
-    func underscoreFor(state: DashboardState) {
-        performanceUnderscore.isHidden = !(state == .Performance)
-        geographyUnderscore.isHidden = !(state == .Geography)
-        competitionUnderscore.isHidden = !(state == .Competition)
+    func buttonHighlightFor(state: DashboardState) {
+        var selectedButton: UIButton!
+        switch state {
+        case .Competition:
+            selectedButton = competitionButton
+        case .Geography:
+            selectedButton = geographyButton
+        case .Performance:
+            selectedButton = performanceButton
+        }
+        
+        [competitionButton, geographyButton, performanceButton].forEach {
+            if $0 == selectedButton {
+                $0?.backgroundColor = Color.burple()
+                $0?.setTitleColor(.white, for: .normal)
+            }
+            else {
+                $0?.backgroundColor = Color.clear()
+                $0?.setTitleColor(Color.slate(), for: .normal)
+            }
+        }
     }
     
     override func viewWillLayoutSubviews() {

@@ -17,7 +17,7 @@ class AcquisitionView: UIView, NibView {
         super.init(coder: aDecoder)
     }
     
-    func bindTo(_ listing: DetailedListing) {
+    func bindTo(_ listing: DetailedListing, duration: Duration) {
         self.listing = listing
         let validBedroomArray = BedroomSize.allCases
             .filter { option in
@@ -61,29 +61,77 @@ class AcquisitionView: UIView, NibView {
     }
     
     func loadData() {
-        let dateRange: [Int] = Array(-90...0)
-        var dataEntries: [ChartDataEntry] = []
+        guard let listing = listing else { return }
+        let dateRange: [Int] = Array(0..<18)
+        var propertyEntries: [ChartDataEntry] = []
+        var marketEntries: [ChartDataEntry] = []
+        
+        let propertyPrices = getPricesFor(listing, beds: bedroomMode)
+        let marketPrices = getMarketPricesFor(listing, beds: bedroomMode)
+        
         dateRange.forEach {
-            let randomPrice: Int = (700...1500).randomElement() ?? 750
-            let dataEntry = ChartDataEntry(x: Double($0),
-                                           y: Double(randomPrice))
-            dataEntries.append(dataEntry)
+            if let price = propertyPrices?[$0] {
+                let dataEntry = ChartDataEntry(x: Double($0-17),
+                                               y: Double(price))
+                propertyEntries.append(dataEntry)
+            }
+            if let price = marketPrices?[$0] {
+                let dataEntry = ChartDataEntry(x: Double($0-17),
+                                               y: Double(price))
+                marketEntries.append(dataEntry)
+            }
         }
         
-        let chartSet = LineChartDataSet(entries: dataEntries, label: "Property Price")
+        let marketSet = LineChartDataSet(entries: marketEntries, label: "Neighborhood Price")
         let color = Color.blue()
-        chartSet.colors = [color]
-        chartSet.setCircleColor(color)
-        chartSet.circleRadius = 1
-        chartSet.drawCircleHoleEnabled = false
-        chartSet.lineWidth = 2
-        chartSet.mode = .cubicBezier
-        chartSet.drawValuesEnabled = false
+        marketSet.colors = [color]
+        marketSet.setCircleColor(color)
+        marketSet.circleRadius = 1
+        marketSet.drawCircleHoleEnabled = false
+        marketSet.lineWidth = 2
+        marketSet.mode = .cubicBezier
+        marketSet.drawValuesEnabled = false
         
-        priceHistoryGraph.bindTo(dataSets: [chartSet])
+        let propertySet = LineChartDataSet(entries: propertyEntries, label: "Property Price")
+        let propColor = Color.burple()
+        propertySet.colors = [propColor]
+        propertySet.setCircleColor(propColor)
+        propertySet.circleRadius = 1
+        propertySet.drawCircleHoleEnabled = false
+        propertySet.lineWidth = 2
+        propertySet.mode = .cubicBezier
+        propertySet.drawValuesEnabled = false
+        
+        priceHistoryGraph.bindTo(dataSets: [propertySet, marketSet])
         setNeedsLayout()
         layoutIfNeeded()
         
         graphTitle.text = "Property Price vs Avg. Neighborhood Price"
+    }
+    
+    func getPricesFor(_ listing: DetailedListing, beds: BedroomSize) -> [Int]? {
+        switch beds {
+        case .Zero:
+            return listing.medianPrice0Bed
+        case .One:
+            return listing.medianPrice1Bed
+        case .Two:
+            return listing.medianPrice2Bed
+        case .Three:
+            return listing.medianPrice3Bed
+        }
+    }
+    
+    func getMarketPricesFor(_ listing: DetailedListing, beds: BedroomSize) -> [Int]? {
+        switch beds {
+        case .Zero:
+            return listing.medianMetroPrice0Bed
+        case .One:
+            return listing.medianMetroPrice1Bed
+        case .Two:
+            return listing.medianMetroPrice2Bed
+        case .Three:
+            return listing.medianMetroPrice3Bed
+        }
     }
 }

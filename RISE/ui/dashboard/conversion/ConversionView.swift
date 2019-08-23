@@ -81,41 +81,70 @@ class ConversionView: UIView, NibView {
     func loadData() {
         guard let listing = listing else { return }
         let dateRange: [Int] = Array(90-durationMode.rawValue..<90)
-        var dataEntries: [ChartDataEntry] = []
+        var propertyEntries: [ChartDataEntry] = []
+        var marketEntries: [ChartDataEntry] = []
+        
+        let propertyPrices = getPropDetailsFor(listing)
+        let marketPrices = getMarketDetailsFor(listing)
+        
         dateRange.forEach {
-            var yValue: Int!
-            switch detailMode {
-            case .Contacts:
-                yValue = listing.avgContactsPerDay[$0]
-            case .Exposure:
-                yValue = listing.avgExposurePerDay[$0]
-            case .Interests:
-                yValue = listing.avgInterestsPerDay[$0]
-            case .Rank:
-                yValue = listing.avgRankPerDay[$0]
+            if let price = propertyPrices?[$0] {
+                let dataEntry = ChartDataEntry(x: Double($0-90),
+                                               y: Double(price))
+                propertyEntries.append(dataEntry)
             }
-            let dataEntry = ChartDataEntry(x: Double($0-90),
-                                           y: Double(yValue))
-            dataEntries.append(dataEntry)
+            if let price = marketPrices?[$0] {
+                let dataEntry = ChartDataEntry(x: Double($0-90),
+                                               y: Double(price))
+                marketEntries.append(dataEntry)
+            }
         }
+//        dateRange.forEach {
+//            if let price = propertyPrices?[$0] {
+//            var yValue: Int!
+//            switch detailMode {
+//            case .Contacts:
+//                yValue = listing.avgContactsPerDay[$0]
+//            case .Exposure:
+//                yValue = listing.avgExposurePerDay[$0]
+//            case .Interests:
+//                yValue = listing.avgInterestsPerDay[$0]
+//            case .Rank:
+//                yValue = listing.avgRankPerDay[$0]
+//            }
+//            let dataEntry = ChartDataEntry(x: Double($0-90),
+//                                           y: Double(yValue))
+//            propertyEntries.append(dataEntry)
+//        }
         
-        let chartSet = LineChartDataSet(entries: dataEntries, label: detailMode.name())
-        let color = Color.burple()
-        chartSet.colors = [color]
-        chartSet.setCircleColor(color)
-        chartSet.circleRadius = 1
-        chartSet.drawCircleHoleEnabled = false
-        chartSet.lineWidth = 2
-        chartSet.mode = .cubicBezier
-        chartSet.drawValuesEnabled = false
+        let marketSet = LineChartDataSet(entries: marketEntries, label: "Neighborhood Price")
+        let color = Color.yellow()
+        marketSet.colors = [color]
+        marketSet.setCircleColor(color)
+        marketSet.circleRadius = 1
+        marketSet.drawCircleHoleEnabled = false
+        marketSet.lineWidth = 2
+        marketSet.mode = .cubicBezier
+        marketSet.drawValuesEnabled = false
         
-        priceHistoryGraph.bindTo(dataSets: [chartSet])
+        let propertySet = LineChartDataSet(entries: propertyEntries, label: detailMode.name())
+        let propColor = Color.burple()
+        propertySet.colors = [propColor]
+        propertySet.setCircleColor(propColor)
+        propertySet.circleRadius = 1
+        propertySet.drawCircleHoleEnabled = false
+        propertySet.lineWidth = 2
+        propertySet.mode = .cubicBezier
+        propertySet.drawValuesEnabled = false
+        
+        priceHistoryGraph.bindTo(dataSets: [marketSet, propertySet])
         setNeedsLayout()
         layoutIfNeeded()
     }
     
     func adjustForMileage() {
         graphTitle.text = "\(detailMode.name()) for the last \(durationMode.name()) (\(getCountFor(mile: mileageMode.rawValue)) competitors)"
+        
     }
     
     func getCountFor(mile: Int) -> Int {
@@ -133,6 +162,76 @@ class ConversionView: UIView, NibView {
             return listing.compCount5Mile
         default:
             return 0
+        }
+    }
+    
+    func getPropDetailsFor(_ listing: DetailedListing) -> [Int]? {
+        switch detailMode {
+        case .Rank:
+            return listing.avgContactsPerDay
+        case .Exposure:
+            return listing.avgExposurePerDay
+        case .Interests:
+            return listing.avgInterestsPerDay
+        case .Contacts:
+            return listing.avgContactsPerDay
+        }
+    }
+    
+    func getMarketDetailsFor(_ listing: DetailedListing) -> [Int]? {
+        switch detailMode {
+        case .Contacts:
+            switch mileageMode {
+            case .One:
+                return listing.avgContacts1mi
+            case .Two:
+                return listing.avgContacts2mi
+            case .Three:
+                return listing.avgContacts3mi
+            case .Four:
+                return listing.avgContacts4mi
+            case .Five:
+                return listing.avgContacts5mi
+            }
+        case .Exposure:
+            switch mileageMode {
+            case .One:
+                return listing.avgExposure1mi
+            case .Two:
+                return listing.avgExposure2mi
+            case .Three:
+                return listing.avgExposure3mi
+            case .Four:
+                return listing.avgExposure4mi
+            case .Five:
+                return listing.avgExposure5mi
+            }
+        case .Interests:
+            switch mileageMode {
+            case .One:
+                return listing.avgInterests1mi
+            case .Two:
+                return listing.avgInterests2mi
+            case .Three:
+                return listing.avgInterests3mi
+            case .Four:
+                return listing.avgInterests4mi
+            case .Five:
+                return listing.avgInterests5mi
+            }
+        case .Rank:
+            switch mileageMode {
+            case .One:
+                return listing.avgRank1mi
+            case .Two:
+                return listing.avgRank2mi
+            case .Three:
+                return listing.avgRank3mi
+            case .Four:
+                return listing.avgRank4mi
+            case .Five:
+                return listing.avgRank5mi
+            }
         }
     }
 }

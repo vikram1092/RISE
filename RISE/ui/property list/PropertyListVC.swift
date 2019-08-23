@@ -40,8 +40,8 @@ class PropertyListVC: UIViewController {
             changeToState(forState: self.state)
         }
     }
-    var coloradoProperties: [Listing] = sampleColoradoData
-    var texasProperties: [Listing] = sampleTexasData
+    var coloradoProperties: [Listing] = []
+    var texasProperties: [Listing] = []
     let riseApi = RiseApi.shared
 
     override func viewDidLoad() {

@@ -96,7 +96,7 @@ class OverviewView: UIView, NibView {
         
         
         priceHistoryGraph.bindTo(dataSets: [chartSet])
-        priceHistoryGraph.drawLimitLineAt(value: Double(-price))
+        priceHistoryGraph.drawLimitLineAt(value: Double(min(-1010, -price)))
         priceHistoryGraph.makeXAxisCurrency()
         setNeedsLayout()
         layoutIfNeeded()
