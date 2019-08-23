@@ -68,7 +68,7 @@ class OverviewView: UIView, NibView {
         
         let price = data.currentPrice
         let adjustedExposures = data.exposures.sorted { a, b -> Bool in
-            return (a.key as NSString).integerValue < (b.key as NSString).integerValue
+            return (a.key as NSString).integerValue > (b.key as NSString).integerValue
         }
         .filter {
             let keyValue = ($0.key as NSString).integerValue
@@ -79,7 +79,7 @@ class OverviewView: UIView, NibView {
         
         var dataEntries: [ChartDataEntry] = []
         adjustedExposures.forEach { key, value in
-            let dataEntry = ChartDataEntry(x: Double((key as NSString).integerValue),
+            let dataEntry = ChartDataEntry(x: Double(-(key as NSString).integerValue),
                                            y: Double(value))
             dataEntries.append(dataEntry)
         }
@@ -96,7 +96,7 @@ class OverviewView: UIView, NibView {
         
         
         priceHistoryGraph.bindTo(dataSets: [chartSet])
-        priceHistoryGraph.drawLimitLineAt(value: Double(price))
+        priceHistoryGraph.drawLimitLineAt(value: Double(-price))
         priceHistoryGraph.makeXAxisCurrency()
         setNeedsLayout()
         layoutIfNeeded()

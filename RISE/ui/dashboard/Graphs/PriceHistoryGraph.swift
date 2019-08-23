@@ -88,6 +88,6 @@ class PriceHistoryGraph: UIView, NibView {
 
 class CustomFormatter: IAxisValueFormatter {
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        return "$" + String(Int(value))
+        return "$" + String(Int(abs(value)))
     }
 }
