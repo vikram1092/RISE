@@ -39,24 +39,36 @@
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LxZ-EC-fZJ">
-                            <rect key="frame" x="60" y="16" width="453" height="43"/>
+                            <rect key="frame" x="60" y="16" width="309" height="43"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                             <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24 Competitors" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ug-Ha-Czu">
+                            <rect key="frame" x="377" y="15" width="120" height="43"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="120" id="kDB-xm-JLn"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="14"/>
+                            <color key="textColor" red="0.51764705879999995" green="0.20392156859999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="vr1-nJ-w9C" firstAttribute="top" secondItem="6q6-Jb-D4C" secondAttribute="top" constant="16" id="1QB-YX-S8m"/>
+                        <constraint firstItem="3Ug-Ha-Czu" firstAttribute="leading" secondItem="LxZ-EC-fZJ" secondAttribute="trailing" constant="8" id="DxP-L3-N2v"/>
                         <constraint firstAttribute="height" constant="367" id="Hzg-iU-Lyy"/>
+                        <constraint firstItem="3Ug-Ha-Czu" firstAttribute="top" secondItem="6q6-Jb-D4C" secondAttribute="top" constant="15" id="I8x-Vk-FHD"/>
                         <constraint firstItem="Gpe-ZX-bwm" firstAttribute="top" secondItem="6q6-Jb-D4C" secondAttribute="top" constant="16" id="JiG-v7-JwA"/>
                         <constraint firstItem="LxZ-EC-fZJ" firstAttribute="top" secondItem="6q6-Jb-D4C" secondAttribute="top" constant="16" id="MbM-OA-MsC"/>
                         <constraint firstItem="LxZ-EC-fZJ" firstAttribute="leading" secondItem="6q6-Jb-D4C" secondAttribute="leading" constant="60" id="UEE-cv-hyj"/>
                         <constraint firstItem="vr1-nJ-w9C" firstAttribute="leading" secondItem="Gpe-ZX-bwm" secondAttribute="trailing" constant="25" id="UKv-KB-b5f"/>
                         <constraint firstAttribute="trailing" secondItem="vr1-nJ-w9C" secondAttribute="trailing" constant="16" id="WpA-Bt-qjm"/>
                         <constraint firstItem="vr1-nJ-w9C" firstAttribute="height" secondItem="Gpe-ZX-bwm" secondAttribute="height" id="ZSh-bN-4s4"/>
-                        <constraint firstItem="Gpe-ZX-bwm" firstAttribute="leading" secondItem="LxZ-EC-fZJ" secondAttribute="trailing" constant="16" id="d1n-TW-Qg9"/>
+                        <constraint firstItem="Gpe-ZX-bwm" firstAttribute="leading" secondItem="3Ug-Ha-Czu" secondAttribute="trailing" constant="32" id="bfE-z0-a5M"/>
                         <constraint firstItem="LxZ-EC-fZJ" firstAttribute="height" secondItem="Gpe-ZX-bwm" secondAttribute="height" id="gYK-Oq-IwR"/>
+                        <constraint firstItem="3Ug-Ha-Czu" firstAttribute="height" secondItem="LxZ-EC-fZJ" secondAttribute="height" id="oZc-54-zVT"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="whD-8s-dhG">
@@ -79,6 +91,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="competitorLabel" destination="3Ug-Ha-Czu" id="hUP-CW-ffM"/>
                 <outlet property="graphTitle" destination="LxZ-EC-fZJ" id="mku-RZ-te7"/>
                 <outlet property="mileageDropDown" destination="Gpe-ZX-bwm" id="Uqa-54-Rte"/>
                 <outlet property="modeDropDown" destination="vr1-nJ-w9C" id="aup-rx-neW"/>

@@ -23,6 +23,7 @@ class PropertyCell: UICollectionViewCell, NibView {
         let imageBlock: ImageBlock = { image in
             DispatchQueue.main.async {
                 self.propImageView.image = image
+                self.containerView.bringSubviewToFront(self.propNameLabel)
             }
         }
         RiseApi.shared.getPhoto(id: listing.imageUrl, imageBlock: imageBlock)

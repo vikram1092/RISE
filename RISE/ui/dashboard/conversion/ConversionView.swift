@@ -9,14 +9,11 @@ class ConversionView: UIView, NibView {
     @IBOutlet weak var modeDropDown: DropDown!
     @IBOutlet weak var mileageDropDown: DropDown!
     @IBOutlet weak var graphTitle: UILabel!
+    @IBOutlet weak var competitorLabel: UILabel!
     
     var priceHistoryGraph: PriceHistoryGraph!
     var detailMode: DetailMode = .Interests
-    var mileageMode: MileageMode = .Two {
-        didSet {
-            adjustForMileage()
-        }
-    }
+    var mileageMode: MileageMode = .Two
     var listing: DetailedListing?
     var durationMode: Duration = .Ninety
     
@@ -68,7 +65,6 @@ class ConversionView: UIView, NibView {
         modeDropDown.text = DetailMode.Interests.name()
         
         guard let lastMile = validMileage.last else {
-            graphTitle.text = "\(detailMode.name()) for the last \(durationMode.name())"
             return
         }
         mileageDropDown.selectedIndex = max(validMileage.count - 1, 0)
@@ -88,12 +84,14 @@ class ConversionView: UIView, NibView {
         let marketPrices = getMarketDetailsFor(listing)
         
         dateRange.forEach {
-            if let price = propertyPrices?[$0] {
+            if (propertyPrices?.count ?? 0) > 0,
+                let price = propertyPrices?[$0] {
                 let dataEntry = ChartDataEntry(x: Double($0-90),
                                                y: Double(price))
                 propertyEntries.append(dataEntry)
             }
-            if let price = marketPrices?[$0] {
+            if (marketPrices?.count ?? 0) > 0,
+                let price = marketPrices?[$0] {
                 let dataEntry = ChartDataEntry(x: Double($0-90),
                                                y: Double(price))
                 marketEntries.append(dataEntry)
@@ -117,7 +115,7 @@ class ConversionView: UIView, NibView {
 //            propertyEntries.append(dataEntry)
 //        }
         
-        let marketSet = LineChartDataSet(entries: marketEntries, label: "Neighborhood Price")
+        let marketSet = LineChartDataSet(entries: marketEntries, label: "My Competitor Average")
         let color = Color.yellow()
         marketSet.colors = [color]
         marketSet.setCircleColor(color)
@@ -127,7 +125,7 @@ class ConversionView: UIView, NibView {
         marketSet.mode = .cubicBezier
         marketSet.drawValuesEnabled = false
         
-        let propertySet = LineChartDataSet(entries: propertyEntries, label: detailMode.name())
+        let propertySet = LineChartDataSet(entries: propertyEntries, label: "My Property")
         let propColor = Color.burple()
         propertySet.colors = [propColor]
         propertySet.setCircleColor(propColor)
@@ -137,15 +135,16 @@ class ConversionView: UIView, NibView {
         propertySet.mode = .cubicBezier
         propertySet.drawValuesEnabled = false
         
-        priceHistoryGraph.bindTo(dataSets: [marketSet, propertySet])
+        graphTitle.text = "\(detailMode.name()) for the Last \(durationMode.name().capitalized)"
+        let competitors = getCountFor(mile: mileageMode.rawValue)
+        let competitorString = competitors > 0 ? "\(competitors) Competitors" : ""
+        competitorLabel.text = competitorString
+        
+        priceHistoryGraph.bindTo(dataSets: [propertySet, marketSet])
         setNeedsLayout()
         layoutIfNeeded()
     }
     
-    func adjustForMileage() {
-        graphTitle.text = "\(detailMode.name()) for the last \(durationMode.name()) (\(getCountFor(mile: mileageMode.rawValue)) competitors)"
-        
-    }
     
     func getCountFor(mile: Int) -> Int {
         guard let listing = listing else { return 0 }
@@ -168,7 +167,7 @@ class ConversionView: UIView, NibView {
     func getPropDetailsFor(_ listing: DetailedListing) -> [Int]? {
         switch detailMode {
         case .Rank:
-            return listing.avgContactsPerDay
+            return listing.avgRankPerDay
         case .Exposure:
             return listing.avgExposurePerDay
         case .Interests:

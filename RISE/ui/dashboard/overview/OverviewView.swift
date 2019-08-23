@@ -84,7 +84,7 @@ class OverviewView: UIView, NibView {
             dataEntries.append(dataEntry)
         }
         
-        let chartSet = LineChartDataSet(entries: dataEntries, label: "Exposure")
+        let chartSet = LineChartDataSet(entries: dataEntries, label: "Renter Reach")
         let color = Color.yellow()
         chartSet.colors = [color]
         chartSet.setCircleColor(color)
@@ -101,6 +101,6 @@ class OverviewView: UIView, NibView {
         setNeedsLayout()
         layoutIfNeeded()
         
-        graphTitle.text = "Renter Exposure vs. Rent Increase"
+        graphTitle.text = "Rent Adjustment in Relation to Renter Reach"
     }
 }

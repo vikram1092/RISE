@@ -187,7 +187,7 @@ class DetailedListing: ImmutableMappable {
         let medianPrice0bedString: String = (try? map.value("median_price_per_day_0_bed")) ?? ""
         let medianPrice1bedString: String = (try? map.value("median_price_per_day_1_bed")) ?? ""
         let medianPrice2bedString: String = (try? map.value("median_price_per_day_2_bed")) ?? ""
-        let medianPrice3bedString: String = (try? map.value("median_price_per_day_4_bed")) ?? ""
+        let medianPrice3bedString: String = (try? map.value("median_price_per_day_3_bed")) ?? ""
         medianPrice0Bed = medianPrice0bedString.split(separator: ",")
             .map { ($0 as NSString).integerValue }
         medianPrice1Bed = medianPrice1bedString.split(separator: ",")
@@ -200,7 +200,7 @@ class DetailedListing: ImmutableMappable {
         let medianMetroPrice0BedString: String = try map.value("metro_median_price_per_day_0_bed")
         let medianMetroPrice1BedString: String = try map.value("metro_median_price_per_day_1_bed")
         let medianMetroPrice2BedString: String = try map.value("metro_median_price_per_day_2_bed")
-        let medianMetroPrice3BedString: String = try map.value("metro_median_price_per_day_4_bed")
+        let medianMetroPrice3BedString: String = try map.value("metro_median_price_per_day_3_bed")
         medianMetroPrice0Bed = medianMetroPrice0BedString.split(separator: ",")
             .map { ($0 as NSString).integerValue }
         medianMetroPrice1Bed = medianMetroPrice1BedString.split(separator: ",")

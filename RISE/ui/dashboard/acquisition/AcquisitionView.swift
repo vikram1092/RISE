@@ -55,7 +55,7 @@ class AcquisitionView: UIView, NibView {
             return
         }
         bedroomMode = firstBedroom
-        bedroomDropDown.selectedIndex = 1
+        bedroomDropDown.selectedIndex = 0
         bedroomDropDown.text = firstBedroom.name()
         loadData()
     }
@@ -70,19 +70,21 @@ class AcquisitionView: UIView, NibView {
         let marketPrices = getMarketPricesFor(listing, beds: bedroomMode)
         
         dateRange.forEach {
-            if let price = propertyPrices?[$0] {
+            if (propertyPrices?.count ?? 0) > 0,
+                let price = propertyPrices?[$0] {
                 let dataEntry = ChartDataEntry(x: Double($0-17),
                                                y: Double(price))
                 propertyEntries.append(dataEntry)
             }
-            if let price = marketPrices?[$0] {
+            if (marketPrices?.count ?? 0) > 0,
+                let price = marketPrices?[$0] {
                 let dataEntry = ChartDataEntry(x: Double($0-17),
                                                y: Double(price))
                 marketEntries.append(dataEntry)
             }
         }
         
-        let marketSet = LineChartDataSet(entries: marketEntries, label: "Neighborhood Price")
+        let marketSet = LineChartDataSet(entries: marketEntries, label: "My Metro")
         let color = Color.blue()
         marketSet.colors = [color]
         marketSet.setCircleColor(color)
@@ -92,7 +94,7 @@ class AcquisitionView: UIView, NibView {
         marketSet.mode = .cubicBezier
         marketSet.drawValuesEnabled = false
         
-        let propertySet = LineChartDataSet(entries: propertyEntries, label: "Property Price")
+        let propertySet = LineChartDataSet(entries: propertyEntries, label: "My Property")
         let propColor = Color.burple()
         propertySet.colors = [propColor]
         propertySet.setCircleColor(propColor)
@@ -106,7 +108,7 @@ class AcquisitionView: UIView, NibView {
         setNeedsLayout()
         layoutIfNeeded()
         
-        graphTitle.text = "Property Price vs Avg. Neighborhood Price"
+        graphTitle.text = "Property Price vs Metro Price"
     }
     
     func getPricesFor(_ listing: DetailedListing, beds: BedroomSize) -> [Int]? {

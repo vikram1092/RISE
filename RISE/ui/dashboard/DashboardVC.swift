@@ -80,6 +80,10 @@ class DashboardVC: UIViewController {
             $0?.clipsToBounds = true
         }
         
+        [performanceButton, geographyButton, competitionButton].forEach {
+            $0?.layer.cornerRadius = 15
+        }
+        
         setupDropdowns()
         changeToState(state: .Competition)
     }
@@ -189,7 +193,12 @@ class DashboardVC: UIViewController {
             selectedRank = String(listing.avgRank30day)
         }
         
-        leasesLabel.text = selectedLeaseCount + " Leases"
+        switch selectedLeaseCount {
+        case "1":
+            leasesLabel.text = selectedLeaseCount + " Lease"
+        default:
+            leasesLabel.text = selectedLeaseCount + " Leases"
+        }
         title1.text = selectedImpressionCount
         title2.text = selectedInterestCount
         title3.text = selectedContactCount
