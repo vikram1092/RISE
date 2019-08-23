@@ -24,20 +24,18 @@ class DetailedListing: ImmutableMappable {
     var compCount4Mile: Int
     var compCount5Mile: Int
     
-    var avgRank90day: Int = 9
-    var avgRank60day: Int = 5
-    var avgRank30day: Int = 7
+    var avgRank90day: Int
+    var avgRank60day: Int
+    var avgRank30day: Int
     
     static let range = Array(0...90)
-    var avgRankPerDay: [Int] = DetailedListing.range.map { _ in Int.random(in: 1...9) }
+    var avgRankPerDay: [Int] //= DetailedListing.range.map { _ in Int.random(in: 1...9) }
     var avgExposurePerDay: [Int] = DetailedListing.range.map { _ in Int.random(in: 1000...3000) }
     var avgInterestsPerDay: [Int] = DetailedListing.range.map { _ in Int.random(in: 50...500) }
     var avgContactsPerDay: [Int] = DetailedListing.range.map { _ in Int.random(in: 20...200) }
     
     var avgPricePerDay: [Int] = DetailedListing.range.map { _ in Int.random(in: 700...1500) }
     var avgMarketPricePerDay: [Int] = DetailedListing.range.map { _ in Int.random(in: 700...1500) }
-    
-    var acquisitionDataSuperSet: AcquisitionData = try! AcquisitionData(JSON: sampleAcqData)
     var acquisitionData: [AcquisitionDataSet]
     
     required init(map: Map) throws {
@@ -64,23 +62,31 @@ class DetailedListing: ImmutableMappable {
         compCount4Mile = try map.value("comp_count_4_mi")
         compCount5Mile = try map.value("comp_count_5_mi")
         
-//        avgRank90day = try map.value("avg_rank_90_day")
-//        avgRank60day = try map.value("avg_rank_60_day")
-//        avgRank30day = try map.value("avg_rank_30_day")
-//        
-//        avgRankPerDay = try map.value("avg_rank_per_day")
-//        avgExposurePerDay = try map.value("avg_exposure_per_day")
-//        avgInterestsPerDay = try map.value("avg_interests_per_day")
-//        avgContactsPerDay = try map.value("avg_contacts_per_day")
-//
+        avgRank90day = try map.value("avg_rank_90_day")
+        avgRank60day = try map.value("avg_rank_60_day")
+        avgRank30day = try map.value("avg_rank_30_day")
+        
+        let avgRankPerDayString: String = try map.value("avg_rank_per_day")
+        let avgExposurePerDayString: String = try map.value("view_count_per_day")
+        let avgInterestsPerDayString: String = try map.value("interest_count_per_day")
+        let avgContactsPerDayString: String = try map.value("contact_count_per_day")
+
+        avgRankPerDay = avgRankPerDayString.split(separator: ",")
+            .map { ($0 as NSString).integerValue }
+        avgExposurePerDay = avgExposurePerDayString.split(separator: ",")
+            .map { ($0 as NSString).integerValue }
+        avgInterestsPerDay = avgInterestsPerDayString.split(separator: ",")
+            .map { ($0 as NSString).integerValue }
+        avgContactsPerDay = avgContactsPerDayString.split(separator: ",")
+            .map { ($0 as NSString).integerValue }
+        
+        acquisitionData = try map.value("reverse_search_json")
 //        avgPricePerDay = try map.value("avg_price_per_day")
 //        avgMarketPricePerDay = try map.value("avg_market_price_per_day")
-//        acquisitionData = try map.value("reverse_search_json")
-        acquisitionData = acquisitionDataSuperSet.list
     }
 }
 
-let sampleAcqData = ["reverse_search_json":[["bed":2,"price":1568,"users":1837,"price_user_predictions":["1000":5363,"1100":4793,"1200":4491,"1300":3745,"1400":3228,"1500":2602,"1600":1837,"1700":1431,"1800":1201,"1900":940,"2000":871,"2100":653,"2200":628,"2300":593,"2400":578,"2500":558,"2600":508,"2700":498,"2800":493,"2900":493,"3000":478,"3100":460,"3200":460,"3300":460,"3400":460,"3500":460,"3600":460,"3700":450,"3800":450,"3900":450,"4000":450,"4100":450,"4200":450,"4300":450,"4400":450,"4500":450,"4600":450,"4700":450,"4800":445,"4900":445,"5000":445,"5100":445,"5200":445,"5300":445,"5400":445,"5500":445,"5600":445,"5700":445,"5800":445,"5900":445,"6000":440]],["bed":1,"price":1314,"users":2180,"price_user_predictions":["1000":5228,"1100":4103,"1200":3421,"1300":2535,"1400":2180,"1500":1847,"1600":1599,"1700":1509,"1800":1459,"1900":1394,"2000":1389,"2100":1329,"2200":1324,"2300":1324,"2400":1314,"2500":1304,"2600":1304,"2700":1304,"2800":1304,"2900":1294,"3000":1294,"3100":1289,"3200":1289,"3300":1284,"3400":1284,"3500":1284,"3600":1279,"3700":1279,"3800":1279,"3900":1279,"4000":1279,"4100":1279,"4200":1279,"4300":1279,"4400":1279,"4500":1279,"4600":1279,"4700":1279,"4800":1279,"4900":1279,"5000":1274,"5100":1274,"5200":1274,"5300":1274,"5400":1274,"5500":1274,"5600":1274,"5700":1274,"5800":1274,"5900":1274,"6000":1259]]]]
+//let sampleAcqData = ["reverse_search_json":[["bed":2,"price":1568,"users":1837,"price_user_predictions":["1000":5363,"1100":4793,"1200":4491,"1300":3745,"1400":3228,"1500":2602,"1600":1837,"1700":1431,"1800":1201,"1900":940,"2000":871,"2100":653,"2200":628,"2300":593,"2400":578,"2500":558,"2600":508,"2700":498,"2800":493,"2900":493,"3000":478,"3100":460,"3200":460,"3300":460,"3400":460,"3500":460,"3600":460,"3700":450,"3800":450,"3900":450,"4000":450,"4100":450,"4200":450,"4300":450,"4400":450,"4500":450,"4600":450,"4700":450,"4800":445,"4900":445,"5000":445,"5100":445,"5200":445,"5300":445,"5400":445,"5500":445,"5600":445,"5700":445,"5800":445,"5900":445,"6000":440]],["bed":1,"price":1314,"users":2180,"price_user_predictions":["1000":5228,"1100":4103,"1200":3421,"1300":2535,"1400":2180,"1500":1847,"1600":1599,"1700":1509,"1800":1459,"1900":1394,"2000":1389,"2100":1329,"2200":1324,"2300":1324,"2400":1314,"2500":1304,"2600":1304,"2700":1304,"2800":1304,"2900":1294,"3000":1294,"3100":1289,"3200":1289,"3300":1284,"3400":1284,"3500":1284,"3600":1279,"3700":1279,"3800":1279,"3900":1279,"4000":1279,"4100":1279,"4200":1279,"4300":1279,"4400":1279,"4500":1279,"4600":1279,"4700":1279,"4800":1279,"4900":1279,"5000":1274,"5100":1274,"5200":1274,"5300":1274,"5400":1274,"5500":1274,"5600":1274,"5700":1274,"5800":1274,"5900":1274,"6000":1259]]]]
 
 
 //{

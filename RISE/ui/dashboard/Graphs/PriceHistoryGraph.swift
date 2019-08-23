@@ -63,4 +63,17 @@ class PriceHistoryGraph: UIView, NibView {
         chartView.setNeedsDisplay()
         layoutIfNeeded()
     }
+    
+    func drawLimitLineAt(value: Double) {
+        let xAxis = chartView.xAxis
+        let limitLine = ChartLimitLine(limit: value)
+        limitLine.lineColor = Color.burple()
+        let linesWidth: CGFloat = 4
+        limitLine.lineDashPhase = linesWidth
+        limitLine.lineDashLengths = [linesWidth, linesWidth]
+        xAxis.addLimitLine(limitLine)
+        chartView.setNeedsLayout()
+        chartView.setNeedsDisplay()
+        layoutIfNeeded()
+    }
 }

@@ -2,7 +2,7 @@ import UIKit
 import iOSDropDown
 import Charts
 
-// Now called Market Pricing
+// Now called My Market 
 class AcquisitionView: UIView, NibView {
     static var className: String = "AcquisitionView"
     @IBOutlet weak var priceHistoryContainer: UIView!

@@ -25,21 +25,21 @@ public enum BedroomSize: Int, CaseIterable {
 }
 
 public enum DetailMode: String, CaseIterable {
+    case Rank = "rank"
     case Exposure = "exposure"
     case Interests = "positive_interests"
     case Contacts = "contacts"
-    case Rank = "rank"
     
     func name() -> String {
         switch self {
+        case .Rank:
+            return "Avg. Rank"
         case .Exposure:
-            return "Exposure"
+            return "Impressions"
         case .Interests:
-            return "Positive Interests"
+            return "Interests"
         case .Contacts:
             return "Contacts"
-        case .Rank:
-            return "Rank"
         }
     }
     

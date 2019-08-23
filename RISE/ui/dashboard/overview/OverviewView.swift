@@ -2,7 +2,7 @@ import UIKit
 import Charts
 import iOSDropDown
 
-// Now called Renter Exposure
+// Now called My Renter Reach
 class OverviewView: UIView, NibView {
     static var className: String = "OverviewView"
     @IBOutlet weak var priceHistoryContainer: UIView!
@@ -19,7 +19,13 @@ class OverviewView: UIView, NibView {
     
     func bindTo(_ listing: DetailedListing) {
         self.listing = listing
-        bedroomDropDown.optionArray = BedroomSize.allCases.map { $0.name() }
+        let validBedroomArray = BedroomSize.allCases
+            .filter { option in
+                return listing.acquisitionData.contains(where: { set -> Bool in
+                    return option.rawValue == set.bed
+                })}
+        bedroomDropDown.optionArray = validBedroomArray
+            .map { $0.name() }
         
         [bedroomDropDown].forEach {
             $0?.borderColor = Color.lightGray()
@@ -44,19 +50,37 @@ class OverviewView: UIView, NibView {
         priceHistoryGraph = PriceHistoryGraph.make(frame: priceHistoryContainer.bounds)
         priceHistoryContainer.addSubview(priceHistoryGraph)
         
-        bedroomDropDown.selectedIndex = 1
-        bedroomDropDown.text = BedroomSize.One.name()
+        guard let firstBedroom = validBedroomArray.first else {
+            loadData()
+            return
+        }
+        bedroomMode = firstBedroom
+        bedroomDropDown.selectedIndex = 0
+        bedroomDropDown.text = firstBedroom.name()
         loadData()
     }
     
     func loadData() {
         
-        let dateRange: [Int] = Array(0...90)
+        let optionalData = listing?.acquisitionData
+            .first(where: { $0.bed == bedroomMode.rawValue })
+        guard let data = optionalData else { return }
+        
+        let price = data.currentPrice
+        let adjustedExposures = data.exposures.sorted { a, b -> Bool in
+            return (a.key as NSString).integerValue < (b.key as NSString).integerValue
+        }
+        .filter {
+            let keyValue = ($0.key as NSString).integerValue
+            let threshold = 500
+            let range = price-threshold...price+threshold
+            return range.contains(keyValue)
+        }
+        
         var dataEntries: [ChartDataEntry] = []
-        dateRange.forEach {
-            let randomPrice: Int = (700...1500).randomElement() ?? 750
-            let dataEntry = ChartDataEntry(x: Double($0),
-                                           y: Double(randomPrice))
+        adjustedExposures.forEach { key, value in
+            let dataEntry = ChartDataEntry(x: Double((key as NSString).integerValue),
+                                           y: Double(value))
             dataEntries.append(dataEntry)
         }
         
@@ -71,9 +95,10 @@ class OverviewView: UIView, NibView {
         chartSet.drawValuesEnabled = false
         
         priceHistoryGraph.bindTo(dataSets: [chartSet])
+        priceHistoryGraph.drawLimitLineAt(value: Double(price))
         setNeedsLayout()
         layoutIfNeeded()
         
-        graphTitle.text = "Renter Exposure vs. Rent Decrease"
+        graphTitle.text = "Renter Exposure vs. Rent Increase"
     }
 }

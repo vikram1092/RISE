@@ -2,7 +2,7 @@ import UIKit
 import iOSDropDown
 import Charts
 
-// Now called Competition
+// Now called My Competition
 class ConversionView: UIView, NibView {
     static var className: String = "ConversionView"
     @IBOutlet weak var priceHistoryContainer: UIView!
@@ -53,7 +53,7 @@ class ConversionView: UIView, NibView {
         priceHistoryGraph = PriceHistoryGraph.make(frame: priceHistoryContainer.bounds)
         priceHistoryContainer.addSubview(priceHistoryGraph)
         
-        modeDropDown.selectedIndex = 1
+        modeDropDown.selectedIndex = 2
         modeDropDown.text = DetailMode.Interests.name()
         mileageDropDown.selectedIndex = 1
         mileageDropDown.text = MileageMode.Two.name()
@@ -62,7 +62,7 @@ class ConversionView: UIView, NibView {
     
     func loadData() {
         guard let listing = listing else { return }
-        let dateRange: [Int] = Array(0...durationMode.rawValue)
+        let dateRange: [Int] = Array(90-durationMode.rawValue..<90)
         var dataEntries: [ChartDataEntry] = []
         dateRange.forEach {
             var yValue: Int!
@@ -76,7 +76,7 @@ class ConversionView: UIView, NibView {
             case .Rank:
                 yValue = listing.avgRankPerDay[$0]
             }
-            let dataEntry = ChartDataEntry(x: Double($0-durationMode.rawValue),
+            let dataEntry = ChartDataEntry(x: Double($0-90),
                                            y: Double(yValue))
             dataEntries.append(dataEntry)
         }
