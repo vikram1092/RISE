@@ -94,8 +94,10 @@ class OverviewView: UIView, NibView {
         chartSet.mode = .cubicBezier
         chartSet.drawValuesEnabled = false
         
+        
         priceHistoryGraph.bindTo(dataSets: [chartSet])
         priceHistoryGraph.drawLimitLineAt(value: Double(price))
+        priceHistoryGraph.makeXAxisCurrency()
         setNeedsLayout()
         layoutIfNeeded()
         

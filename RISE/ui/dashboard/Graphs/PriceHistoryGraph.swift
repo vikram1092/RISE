@@ -76,4 +76,18 @@ class PriceHistoryGraph: UIView, NibView {
         chartView.setNeedsDisplay()
         layoutIfNeeded()
     }
+    
+    func makeXAxisCurrency() {
+        let xAxis = chartView.xAxis
+        xAxis.valueFormatter = CustomFormatter()
+        chartView.setNeedsLayout()
+        chartView.setNeedsDisplay()
+        layoutIfNeeded()
+    }
+}
+
+class CustomFormatter: IAxisValueFormatter {
+    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        return "$" + String(Int(value))
+    }
 }
