@@ -77,7 +77,7 @@ class DashboardVC: UIViewController {
         let radius: CGFloat = 8
         [overviewViewContainer, acqViewContainer, conversionViewContainer,
          view1, view2, view3, view4].forEach {
-            $0?.layer.borderColor = Color.lightGray().cgColor
+            $0?.layer.borderColor = Color.lightGray().withAlpha(0.5).cgColor
             $0?.layer.borderWidth = 1
             $0?.layer.cornerRadius = radius
             $0?.clipsToBounds = true

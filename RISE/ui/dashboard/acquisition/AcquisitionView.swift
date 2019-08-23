@@ -19,11 +19,12 @@ class AcquisitionView: UIView, NibView {
     
     func bindTo(_ listing: DetailedListing) {
         self.listing = listing
-        bedroomDropDown.optionArray = BedroomSize.allCases
+        let validBedroomArray = BedroomSize.allCases
             .filter { option in
                 return listing.acquisitionData.contains(where: { set -> Bool in
-                return option.rawValue == set.bed
-            })}
+                    return option.rawValue == set.bed
+                })}
+        bedroomDropDown.optionArray = validBedroomArray
             .map { $0.name() }
         
         [bedroomDropDown].forEach {
@@ -49,8 +50,13 @@ class AcquisitionView: UIView, NibView {
         priceHistoryGraph = PriceHistoryGraph.make(frame: priceHistoryContainer.bounds)
         priceHistoryContainer.addSubview(priceHistoryGraph)
         
+        guard let firstBedroom = validBedroomArray.first else {
+            loadData()
+            return
+        }
+        bedroomMode = firstBedroom
         bedroomDropDown.selectedIndex = 1
-        bedroomDropDown.text = BedroomSize.One.name()
+        bedroomDropDown.text = firstBedroom.name()
         loadData()
     }
     

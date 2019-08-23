@@ -12,7 +12,11 @@ class ConversionView: UIView, NibView {
     
     var priceHistoryGraph: PriceHistoryGraph!
     var detailMode: DetailMode = .Interests
-    var mileageMode: MileageMode = .Two
+    var mileageMode: MileageMode = .Two {
+        didSet {
+            adjustForMileage()
+        }
+    }
     var listing: DetailedListing?
     var durationMode: Duration = .Ninety
     
@@ -23,8 +27,15 @@ class ConversionView: UIView, NibView {
     func bindTo(_ listing: DetailedListing, durationMode: Duration) {
         self.listing = listing
         self.durationMode = durationMode
+        
+        let validMileage = MileageMode.allCases
+            .filter {
+                return self.getCountFor(mile: $0.rawValue) > 2
+            }
+        
         modeDropDown.optionArray = DetailMode.allCases.map { $0.name() }
-        mileageDropDown.optionArray = MileageMode.allCases.map { $0.name() }
+        mileageDropDown.optionArray = validMileage
+            .map { $0.name() }
         
         [modeDropDown, mileageDropDown].forEach {
             $0?.borderColor = Color.lightGray()
@@ -55,8 +66,15 @@ class ConversionView: UIView, NibView {
         
         modeDropDown.selectedIndex = 2
         modeDropDown.text = DetailMode.Interests.name()
-        mileageDropDown.selectedIndex = 1
-        mileageDropDown.text = MileageMode.Two.name()
+        
+        guard let lastMile = validMileage.last else {
+            graphTitle.text = "\(detailMode.name()) for the last \(durationMode.name())"
+            return
+        }
+        mileageDropDown.selectedIndex = max(validMileage.count - 1, 0)
+        mileageDropDown.text = lastMile.name()
+        mileageMode = lastMile
+        
         loadData()
     }
     
@@ -94,7 +112,27 @@ class ConversionView: UIView, NibView {
         priceHistoryGraph.bindTo(dataSets: [chartSet])
         setNeedsLayout()
         layoutIfNeeded()
-        
-        graphTitle.text = "\(detailMode.name()) for the last \(durationMode.name())"
+    }
+    
+    func adjustForMileage() {
+        graphTitle.text = "\(detailMode.name()) for the last \(durationMode.name()) (\(getCountFor(mile: mileageMode.rawValue)) competitors)"
+    }
+    
+    func getCountFor(mile: Int) -> Int {
+        guard let listing = listing else { return 0 }
+        switch mile {
+        case 1:
+            return listing.compCount1Mile
+        case 2:
+            return listing.compCount2Mile
+        case 3:
+            return listing.compCount3Mile
+        case 4:
+            return listing.compCount4Mile
+        case 5:
+            return listing.compCount5Mile
+        default:
+            return 0
+        }
     }
 }

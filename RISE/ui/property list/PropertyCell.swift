@@ -19,6 +19,12 @@ class PropertyCell: UICollectionViewCell, NibView {
     
     func bindTo(listing: Listing) {
         propNameLabel.text = listing.name
-        propImageView.image = UIImage()
+        
+        let imageBlock: ImageBlock = { image in
+            DispatchQueue.main.async {
+                self.propImageView.image = image
+            }
+        }
+        RiseApi.shared.getPhoto(id: listing.imageUrl, imageBlock: imageBlock)
     }
 }

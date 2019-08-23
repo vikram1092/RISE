@@ -63,6 +63,12 @@ class RiseApi {
                                    completion: resultHandler)
     }
     
+    func getPhoto(id: String, imageBlock: @escaping ImageBlock) {
+        sessionManager.imageRequest(id: id,
+                                   method: .get,
+                                   completion: imageBlock)
+    }
+    
     static func mapTestResponse(json: JSONDict) -> TestModel? {
         let testModel = try! TestModel(JSON: json)
         return testModel

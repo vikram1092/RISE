@@ -9,6 +9,7 @@ public typealias EmptyBlock = () -> Void
 public typealias ErrorBlock = (NSError) -> Void
 public typealias JSONDict = [String: AnyObject]
 public typealias JSONDictBlock = (JSONDict) -> Void
+public typealias ImageBlock = (UIImage) -> Void
 
 struct APIRequest {
     
@@ -41,7 +42,11 @@ final class APISessionManager {
     let apiKey = "m93TumTsg9cG36cazYy5Nn7j2smgQxRx"
     let headers: HTTPHeaders = ["X-API-Secret":"m93TumTsg9cG36cazYy5Nn7j2smgQxRx"]
     let baseURL : String = ApiBaseURL.Base.rawValue
+    
+    let cloudinaryUrl = "https://res.cloudinary.com/apartmentlist/image/upload/t_fullsize/"
+    
     let session = URLSession.init(configuration: .default)
+    var imageCache = [String: UIImage]()
     
     var urlString : String {
         return "\(baseURL)/"
@@ -67,6 +72,31 @@ final class APISessionManager {
                     return
                 }
                 completion(AsyncResult.Success(json))
+            }
+        }
+        task.resume()
+    }
+    
+    func imageRequest(id: String,
+                      method: HTTPMethod,
+                      completion: @escaping ImageBlock) {
+        // Check cache and return
+        if let image = imageCache[id] {
+            completion(image)
+            return
+        }
+        
+        let url = URL(string: cloudinaryUrl + id)!
+        let request = URLRequest(url: url)
+        let task = session.dataTask(with: request) { (data, response, error) in
+            
+            if let _ = error {
+                return
+            }
+            else if let data = data,
+                let image = UIImage(data: data) {
+                self.imageCache[id] = image
+                completion(image)
             }
         }
         task.resume()
